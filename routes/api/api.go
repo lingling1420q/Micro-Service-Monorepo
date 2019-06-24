@@ -1,7 +1,9 @@
 package v1
 
 import (
-    "github.com/gin-gonic/gin"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetTags(c *gin.Context) {
@@ -14,4 +16,8 @@ func EditTag(c *gin.Context) {
 }
 
 func DeleteTag(c *gin.Context) {
+}
+
+func Helloworld(c *gin.Context) {
+	c.String(http.StatusOK, "hello, world")
 }
