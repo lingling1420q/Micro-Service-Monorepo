@@ -3,7 +3,7 @@ package p1
 import (
 	"fmt"
 	http "net/http"
-	"asdf"
+
 	gin "github.com/gin-gonic/gin"
 )
 
@@ -14,7 +14,7 @@ func Index(c *gin.Context) {
 
 //Helloworld ...
 func Helloworld(c *gin.Context) {
-	fmt.Println()
+	fmt.Print()
 	c.String(http.StatusOK, "hello, world")
 }
 
