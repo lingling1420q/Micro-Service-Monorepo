@@ -1,10 +1,10 @@
 package p1
 
 import (
-	"net/http"
 	"fmt"
-	"testing"
-	"github.com/gin-gonic/gin"
+	http "net/http"
+	"asdf"
+	gin "github.com/gin-gonic/gin"
 )
 
 // Index ...
@@ -14,10 +14,9 @@ func Index(c *gin.Context) {
 
 //Helloworld ...
 func Helloworld(c *gin.Context) {
+	fmt.Println()
 	c.String(http.StatusOK, "hello, world")
 }
-
-
 
 // type Programmer interface {
 // 	WriteHelloWorld() Code
