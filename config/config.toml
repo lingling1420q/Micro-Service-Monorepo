@@ -1,0 +1,21 @@
+
+Debug = true
+
+[database]
+host = "47.888.888.88"
+port = "3306"
+username = "root"
+password = "ali"
+dbName = "may"
+
+[server]
+port = ":8080"
+
+[clients]
+data = [ ["gamma", "delta"], [1, 2] ] # just an update to make sure parsers support it
+
+# Line breaks are OK when inside arrays
+hosts = [
+  "alpha",
+  "omega"
+]
