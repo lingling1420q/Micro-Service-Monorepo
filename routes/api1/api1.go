@@ -10,7 +10,7 @@ import (
 
 // Index ...
 func Index(c *gin.Context) {
-	conn := db.Conn()
+	conn := db.ConnMysql()
 	log.Println(conn)
 	c.String(http.StatusOK, "hello, index, api1")
 }

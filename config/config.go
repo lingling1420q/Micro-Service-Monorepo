@@ -15,22 +15,62 @@ var (
 
 /*TomlConfig ... */
 type TomlConfig struct {
-	Debug   bool
-	DB      database `toml:"database"`
-	Server  server
-	Clients clients
+	Debug    bool
+	DB       Database `toml:"database"`
+	Server   server
+	Clients  clients
+	Wechat   wechat
+	QyWechat qyWechat
 }
 
-type database struct {
-	Host     string
-	Port     string
-	Username string
-	Password string
-	DbName   string
+//Mysql config
+type Mysql struct {
+	Host     string `toml:"host"`
+	Port     string `toml:"port"`
+	Username string `toml:"username"`
+	Password string `toml:"password"`
+	DbName   string `toml:"dbName"`
+}
+
+//Redis config
+type Redis struct {
+	Host     string `toml:"host"`
+	Port     string `toml:"port"`
+	Password string `toml:"password"`
+	DbName   int    `toml:"dbName"`
+}
+
+//Database info
+type Database struct {
+	Mysql Mysql `toml:"mysql"`
+	Redis Redis `toml:"redis"`
 }
 
 type server struct {
 	Port string
+}
+
+type wechat struct {
+	WechatURL string
+	Appid     string
+	Secret    string
+	GrantType string
+}
+
+// ThirdParty qywxthird party info
+type ThirdParty struct {
+	SuiteTokenURL string `toml:"suiteTokenURL"`
+	SuiteID       string `toml:"suiteID"`
+	SuitSecret    string `toml:"suitSecret"`
+	TpURL         string `toml:"tpURL"`
+}
+type qyWechat struct {
+	WechatURL   string     `toml:"wechatURL"`
+	GetTokenURL string     `toml:"getTokenURL"`
+	Corpid      string     `toml:"corpid"`
+	Secret      string     `toml:"secret"`
+	GrantType   string     `toml:"grantType"`
+	ThirdParty  ThirdParty `toml:"thirdParty"`
 }
 
 type clients struct {
