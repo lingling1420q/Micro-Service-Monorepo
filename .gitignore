@@ -1,7 +1,7 @@
-.idea/
-.vscode/
+.idea
+.vscode
 
 .DS_Store
 
-vendor/
-tmp/
+vendor
+tmp
