@@ -33,7 +33,7 @@ func ShellCmd(command string) (error, string, string) {
 
 func main() {
 	c := cron.New()
-	spec := "*/2 * * * * ?"
+	spec := "*/5 * * * * ?"
 	c.AddFunc(spec, task)
 	c.Start()
 	select {}
