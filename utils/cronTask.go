@@ -11,8 +11,8 @@ import (
 func task() {
 	fmt.Println("cron ...")
 	const cmd = `
-	    git add -A;
-		git commit -m "hello cron3";
+	    git add -A &&
+		git commit -m "hello cron3" &&
 		git push;
 	`
 	err, std, stderr := ShellCmd(cmd)
