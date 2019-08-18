@@ -12,7 +12,7 @@ func task() {
 	fmt.Println("cron ...")
 	const cmd = `
 	    git add -A
-		git commit -m "hello cron"
+		git commit -m "hello cron2"
 		git pull
 		git push
 	`
