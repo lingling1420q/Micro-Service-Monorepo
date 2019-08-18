@@ -13,7 +13,6 @@ func task() {
 	const cmd = `
 	    git add -A &&
 		git commit -m "hello cron2" &&
-		git pull &&
 		git push
 	`
 	err, std, stderr := ShellCmd(cmd)
