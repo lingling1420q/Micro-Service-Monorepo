@@ -4,17 +4,20 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
+	"time"
 
 	"github.com/robfig/cron"
 )
 
 func task() {
 	fmt.Println("cron ...")
-	const cmd = `
+	now := time.Now()
+	cmd := fmt.Sprintf(`
 	    git add -A &&
-		git commit -m "hello cron3" &&
+		git commit -m "%v" &&
 		git push;
-	`
+	`, now)
+	fmt.Println(cmd)
 	err, std, stderr := ShellCmd(cmd)
 	fmt.Println(err, std, stderr)
 }
