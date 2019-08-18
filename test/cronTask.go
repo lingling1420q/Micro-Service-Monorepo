@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
+	"strings"
 	"time"
 
 	"github.com/robfig/cron"
@@ -18,22 +19,24 @@ const (
 	`
 )
 
-func task() {
-	fmt.Println("golang cron task running ...")
-	cmd := fmt.Sprintf(quickPush, time.Now())
-	err, std, stderr := ShellCmd(cmd)
-	fmt.Println(err, std, stderr)
-}
-
-func ShellCmd(command string) (error, string, string) {
+func ShellCmd(command string) (string, string, error) {
 	fmt.Println(command)
-
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 	cmd := exec.Command(shellToUse, "-c", command)
 	cmd.Stdout, cmd.Stderr = &stdout, &stderr
 	err := cmd.Run()
-	return err, stdout.String(), stderr.String()
+	return stdout.String(), stderr.String(), err
+}
+
+func task() {
+	fmt.Println("golang cron task running ...")
+	qpushCmd := fmt.Sprintf(quickPush, time.Now())
+	touchCmd := fmt.Sprintf("touch %v", strings.Replace(fmt.Sprintf("%v", time.Now()), " ", "", -1))
+	_err, _std, _stderr := ShellCmd(touchCmd)
+	fmt.Println(_err, _std, _stderr)
+	err, std, stderr := ShellCmd(qpushCmd)
+	fmt.Println(err, std, stderr)
 }
 
 func main() {
