@@ -9,11 +9,13 @@ import (
 	"regexp"
 
 	"github.com/go-redis/redis"
-	_ "github.com/go-sql-driver/mysql"
+
+	_ "github.com/go-sql-driver/mysql" /* mysql driver init */
 	"github.com/jinzhu/gorm"
 	"reflect"
 )
 
+/* TODO: split dbs */
 var (
 	gormMysqlClient *gorm.DB
 	sqlClient       *sql.DB
@@ -27,6 +29,7 @@ func init() {
 	initCfg(dbCfg.Mysql)
 
 }
+
 func initGormMysql() {
 	gormMysqlClient, _ = gorm.Open("mysql", mysqlCfg)
 	defer gormMysqlClient.Close()
