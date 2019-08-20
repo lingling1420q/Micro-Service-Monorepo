@@ -31,7 +31,10 @@ func init() {
 	format := logging.MustStringFormatter(
 		`%{color}%{time} [%{level}] %{module} %{shortfile} ▶ %{color:reset} %{message}`,
 	)
-
+	/* TODO log file rw+ */
+	/* TODO bug: log print in a wrong path */
+	f, _ := os.Create("./log.log")
+	bk := logging.NewLogBackend(f, "", 0)
 	// For demo purposes, create two backend for os.Stderr.
 	backend1 := logging.NewLogBackend(os.Stderr, "", 0)
 	backend2 := logging.NewLogBackend(os.Stderr, "", 0)
@@ -46,5 +49,5 @@ func init() {
 	backend1Leveled.SetLevel(logging.ERROR, "")
 
 	// Set the backends to be used.
-	logging.SetBackend(backend1Leveled, backend2Formatter)
+	logging.SetBackend(backend1Leveled, backend2Formatter,bk)
 }
