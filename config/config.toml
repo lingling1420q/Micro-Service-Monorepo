@@ -4,10 +4,10 @@ Debug = true
 [database]
 
   [database.mysql]
-  host = "47.105.181.69"
+  host = "www.luxuze.club"
   port = "3306"
   username = "root"
-  password = "ali-1995"
+  password = "pl,okm123"
   dbName = "gin"
 
   [database.redis]

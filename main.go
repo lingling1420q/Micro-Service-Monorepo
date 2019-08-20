@@ -4,11 +4,10 @@ import (
 	"gin-demo/config"
 	"gin-demo/logger"
 	"gin-demo/routes"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -18,6 +17,7 @@ func init() {
 func main() {
 	/* loading toml configs */
 	cfg := config.Config()
+
 	if !cfg.Debug {
 		gin.SetMode(gin.ReleaseMode)
 	}

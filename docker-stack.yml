@@ -1,0 +1,16 @@
+version: "3.7"
+
+# docker swarm init --advertise-addr 127.0.0.1
+services:
+  # Use root/pl,okm123 as user/password credentials
+  db:
+    image: mysql
+    volumes:
+      - sqldata:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "pl,okm123"
+volumes:
+  sqldata:

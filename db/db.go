@@ -6,11 +6,12 @@ import (
 	config "gin-demo/config"
 	"gin-demo/defs"
 	logger "gin-demo/logger"
-	"strings"
+	"regexp"
 
 	"github.com/go-redis/redis"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"reflect"
 )
 
 var (
@@ -19,20 +20,18 @@ var (
 	redisClient     *redis.Client
 	dbCfg           = config.Config().DB
 	err             error
-	mysqlPath       = strings.Join([]string{
-		dbCfg.Mysql.Username, ":",
-		dbCfg.Mysql.Password, "@tcp(",
-		dbCfg.Mysql.Host, ":",
-		dbCfg.Mysql.Port, ")/",
-		dbCfg.Mysql.DbName, "?charset=utf8"}, "")
+	mysqlCfg        = "Username:Password@tcp(Host:Port)/DbName?charset=utf8"
 )
 
-func initGormMysql() {
+func init() {
+	initCfg(dbCfg.Mysql)
 
-	gormMysqlClient, _ = gorm.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/?charset=utf8")
+}
+func initGormMysql() {
+	gormMysqlClient, _ = gorm.Open("mysql", mysqlCfg)
 	defer gormMysqlClient.Close()
 	//db.DB().SetMaxOpenConns(1)
-	gormMysqlClient.Exec("use gin")
+	// gormMysqlClient.Exec("use gin")
 	if err != nil {
 		logger.Error(defs.ConnDBErr, err.Error())
 	}
@@ -49,7 +48,7 @@ func ConnGormMysql() *gorm.DB {
 func initConnMysql() {
 	logger.Info("mysql database connection initialization ...")
 
-	sqlClient, err = sql.Open("mysql", mysqlPath)
+	sqlClient, err = sql.Open("mysql", mysqlCfg)
 	if err != nil {
 		logger.Error(defs.ConnDBErr, err.Error())
 		panic(err.Error())
@@ -80,4 +79,14 @@ func ConnRedis() *redis.Client {
 		initRedis()
 	}
 	return redisClient
+}
+
+func initCfg(cfgStruct interface{}) {
+	t, v := reflect.TypeOf(cfgStruct), reflect.ValueOf(cfgStruct)
+	for k := 0; k < t.NumField(); k++ {
+		r, _ := regexp.Compile(t.Field(k).Name)
+		mysqlCfg = r.ReplaceAllString(mysqlCfg, fmt.Sprintf(
+			"%v", v.Field(k).Interface()))
+	}
+	logger.Debug(mysqlCfg)
 }
