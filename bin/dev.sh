@@ -85,7 +85,7 @@ case ${ARGS[0]} in
             *)          print_help ;;
         esac ;;
     run)
-        go run main.go ;;
+        $ROOT_DIR/bin/fresh ;;
     build)
         build_server ;;
     *)

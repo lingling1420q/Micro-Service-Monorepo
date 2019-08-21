@@ -3,6 +3,8 @@
 
 .DS_Store
 
-vendor
-tmp
 *.log
+
+!vendor
+vendor/*
+!vendor/modules.txt
