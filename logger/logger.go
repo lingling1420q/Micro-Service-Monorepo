@@ -6,7 +6,7 @@ import (
 	"github.com/op/go-logging"
 )
 
-var myLog = logging.MustGetLogger("myLogger")
+var myLog = logging.MustGetLogger("-")
 
 // Info logs ...
 var (
@@ -49,5 +49,5 @@ func init() {
 	backend1Leveled.SetLevel(logging.ERROR, "")
 
 	// Set the backends to be used.
-	logging.SetBackend(backend1Leveled, backend2Formatter,bk)
+	logging.SetBackend(backend1Leveled, backend2Formatter, bk)
 }
