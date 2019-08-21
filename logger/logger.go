@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/op/go-logging"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 var myLog = logging.MustGetLogger("-")
@@ -29,25 +30,24 @@ func init() {
 	// which is dependent on the log level. Many fields have a custom output
 	// formatting too, eg. the time returns the hour down to the milli second.
 	format := logging.MustStringFormatter(
-		`%{color}%{time} [%{level}] %{module} %{shortfile} ▶ %{color:reset} %{message}`,
+		`%{color}%{time} [%{level}] %{module} %{shortfile} > %{color:reset} %{message}`,
 	)
-	/* TODO log file rw+ */
-	/* TODO bug: log print in a wrong path */
-	f, _ := os.Create("./log.log")
-	bk := logging.NewLogBackend(f, "", 0)
-	// For demo purposes, create two backend for os.Stderr.
-	backend1 := logging.NewLogBackend(os.Stderr, "", 0)
-	backend2 := logging.NewLogBackend(os.Stderr, "", 0)
+	/* TODO bug: Aliyun log print in a wrong path */
 
-	// For messages written to backend2 we want to add some additional
+	// For demo purposes, create two backend for os.Stderr.
+	console := logging.NewLogBackend(os.Stderr, "", 0)
+	fileBackend := logging.NewLogBackend(&lumberjack.Logger{
+		Filename: "./tmp/logs/gin.log",
+		MaxSize:  2,    // megabytes
+		Compress: true, // disabled by default
+	}, "", 0)
+
+	// For messages written to console we want to add some additional
 	// information to the output, including the used log level and the name of
 	// the function.
-	backend2Formatter := logging.NewBackendFormatter(backend2, format)
-
-	// Only errors and more severe messages should be sent to backend1
-	backend1Leveled := logging.AddModuleLevel(backend1)
-	backend1Leveled.SetLevel(logging.ERROR, "")
+	consoleFormatter := logging.NewBackendFormatter(console, format)
+	fileOutputFormatter := logging.NewBackendFormatter(fileBackend, format)
 
 	// Set the backends to be used.
-	logging.SetBackend(backend1Leveled, backend2Formatter, bk)
+	logging.SetBackend(consoleFormatter, fileOutputFormatter)
 }
