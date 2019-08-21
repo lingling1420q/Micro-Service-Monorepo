@@ -15,7 +15,7 @@ services:
 
   # Use root/pl,okm123 as user/password credentials
   mysql:
-    image: mysql
+    image: mysql:latest
     volumes:
       - type: volume
         source: mysqldata
@@ -27,22 +27,28 @@ services:
       MYSQL_ROOT_PASSWORD: "pl,okm123"
 
   redis:
-    image: redis
+    image: redis:latest
     volumes:
       - type: volume
         source: redisdata
         target: /data
     ports:
       - "6379:6379"
+  command: --requirepass pl,okm123
 
   mongoDB:
-    image: mongo
+    image: mongo:latest
     volumes:
       - type: volume
         source: mongodata
         target: /data/db
     ports:
       - "27017:27017"
+    environment:
+      # provide your credentials here
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pl,okm123
+
 volumes:
   mysqldata:
   redisdata:
