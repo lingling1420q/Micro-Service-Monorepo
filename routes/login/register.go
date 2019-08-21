@@ -1,8 +1,8 @@
 package login
 
 import (
-	"encoding/json"
 	db "gin-demo/db"
+	"gin-demo/logger"
 
 	"net/http"
 
@@ -15,10 +15,8 @@ func AddUser(c *gin.Context) {
 	pwd := c.PostForm("pwd")
 
 	gormConn := db.ConnGormMysql()
-	// gormConn.CreateTable(&defs.TBL_USERS{})
 	// 构建User
 	user := db.TBL_USERS{Name: name, Pwd: pwd}
-	// 设置表名为单数形式，如user表，不设置为users
 	// 存入数据库
 	gormConn.Create(&user)
 
@@ -29,16 +27,15 @@ func AddUser(c *gin.Context) {
 
 }
 
-//GetUserInfo  get user info by ID
+//GetUserInfo  get user info by name
 func GetUserInfo(c *gin.Context) {
-	userID := c.Param("id")
 	gormConn := db.ConnGormMysql()
-	user := db.TBL_USERS{}
-	// select from user by ID
-	gormConn.Find(&user, userID)
-	userInfo, _ := json.Marshal(user)
+
+	user := db.TBL_USERS{Name: c.Param("name")}
+
+	gormConn.Select("name, pwd").Where(&user).Find(&user)
+	logger.Debug(user)
+
 	//返回数据
-	c.JSON(http.StatusOK, gin.H{
-		"userInfo": string(userInfo),
-	})
+	c.JSON(http.StatusOK, user)
 }
