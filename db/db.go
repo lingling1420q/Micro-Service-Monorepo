@@ -32,10 +32,10 @@ func init() {
 func ConnGormMysql() *gorm.DB {
 	if gormMysqlClient == nil {
 		gormMysqlClient, err = gorm.Open("mysql", mysqlCfg)
-		defer gormMysqlClient.Close()
 		if err != nil {
 			logger.Error(defs.ConnDBErr, err.Error())
 		}
+		gormMysqlClient.AutoMigrate(&TBL_USERS{})
 	}
 	return gormMysqlClient
 }

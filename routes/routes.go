@@ -4,7 +4,6 @@ import (
 	api1 "gin-demo/routes/api1"
 	api2 "gin-demo/routes/api2"
 	login "gin-demo/routes/login"
-	user "gin-demo/routes/user"
 
 	gin "github.com/gin-gonic/gin"
 )
@@ -16,6 +15,5 @@ func InitRouter() *gin.Engine {
 	login.Route(r)
 	api1.Route(r)
 	api2.Route(r)
-	user.Route(r)
 	return r
 }

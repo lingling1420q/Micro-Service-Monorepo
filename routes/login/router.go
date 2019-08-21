@@ -8,5 +8,7 @@ func Route(r *gin.Engine) {
 		router.GET("/wx", Wx)
 		router.GET("/qywx", Qywx)
 		router.GET("/qywxtp", QywxThirdParty)
+		router.POST("/register", AddUser)
+		router.GET("/get/:id", GetUserInfo)
 	}
 }
