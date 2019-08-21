@@ -25,59 +25,44 @@ var (
 
 func init() {
 	InitCfg(&mysqlCfg, dbCfg.Mysql)
-	logger.Debugf("Mysql config: %s", mysqlCfg)
-}
-
-func initGormMysql() {
-	gormMysqlClient, _ = gorm.Open("mysql", mysqlCfg)
-	defer gormMysqlClient.Close()
-	//db.DB().SetMaxOpenConns(1)
-	// gormMysqlClient.Exec("use gin")
-	if err != nil {
-		logger.Error(defs.ConnDBErr, err.Error())
-	}
+	logger.Noticef("Mysql config: %s", mysqlCfg)
 }
 
 // ConnGormMysql gormMysql
 func ConnGormMysql() *gorm.DB {
 	if gormMysqlClient == nil {
-		initGormMysql()
+		gormMysqlClient, err = gorm.Open("mysql", mysqlCfg)
+		defer gormMysqlClient.Close()
+		if err != nil {
+			logger.Error(defs.ConnDBErr, err.Error())
+		}
 	}
 	return gormMysqlClient
-}
-
-func initConnMysql() {
-	logger.Info("mysql database connection initialization ...")
-
-	sqlClient, err = sql.Open("mysql", mysqlCfg)
-	if err != nil {
-		logger.Error(defs.ConnDBErr, err.Error())
-		panic(err.Error())
-	}
 }
 
 // ConnMysql  connect to mysql
 func ConnMysql() *sql.DB {
 	if sqlClient == nil || sqlClient.Ping() != nil {
-		initConnMysql()
+		logger.Info("mysql database connection initialization ...")
+		sqlClient, err = sql.Open("mysql", mysqlCfg)
+		if err != nil {
+			logger.Error(defs.ConnDBErr, err.Error())
+			panic(err.Error())
+		}
 	}
 	return sqlClient
-}
-
-func initRedis() {
-	logger.Info("redis database connection initialization ...")
-	client := redis.NewClient(&redis.Options{
-		Addr:     dbCfg.Redis.Host + ":" + dbCfg.Redis.Port,
-		Password: dbCfg.Redis.Password,
-		DB:       dbCfg.Redis.DbName,
-	})
-	fmt.Println(client.Ping().Result())
 }
 
 // ConnRedis connect to redis
 func ConnRedis() *redis.Client {
 	if redisClient == nil {
-		initRedis()
+		logger.Info("redis database connection initialization ...")
+		client := redis.NewClient(&redis.Options{
+			Addr:     dbCfg.Redis.Host + ":" + dbCfg.Redis.Port,
+			Password: dbCfg.Redis.Password,
+			DB:       dbCfg.Redis.DbName,
+		})
+		fmt.Println(client.Ping().Result())
 	}
 	return redisClient
 }

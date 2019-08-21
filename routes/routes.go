@@ -4,38 +4,18 @@ import (
 	api1 "gin-demo/routes/api1"
 	api2 "gin-demo/routes/api2"
 	login "gin-demo/routes/login"
+	user "gin-demo/routes/user"
 
 	gin "github.com/gin-gonic/gin"
 )
 
 // InitRouter ...
 func InitRouter() *gin.Engine {
-	r := gin.New()
-	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
+	r := gin.Default()
 
-	loginRouter := r.Group("/login")
-	{
-		loginRouter.GET("/wx", login.Wx)
-		loginRouter.GET("/qywx", login.Qywx)
-		loginRouter.GET("/qywxtp", login.QywxThirdParty)
-	}
-
-	a1 := r.Group("/api1")
-	{
-		a1.GET("/", api1.Index)
-		a1.GET("/h1", api1.Helloworld)
-	}
-	a2 := r.Group("/api2")
-	{
-		a2.GET("/", api2.Index)
-		a2.GET("/h2", api2.Helloworld)
-	}
-	// a3 := r.Group("/user")
-	// {
-	// 	a3.POST("/register", user.AddUser)
-	// 	a3.GET("/get/:id", user.GetUserInfo)
-	// }
-
+	login.Route(r)
+	api1.Route(r)
+	api2.Route(r)
+	user.Route(r)
 	return r
 }
