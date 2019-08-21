@@ -6,13 +6,11 @@ import (
 	config "gin-demo/config"
 	"gin-demo/defs"
 	logger "gin-demo/logger"
-	"regexp"
 
 	"github.com/go-redis/redis"
 
 	_ "github.com/go-sql-driver/mysql" /* mysql driver init */
 	"github.com/jinzhu/gorm"
-	"reflect"
 )
 
 /* TODO: split dbs */
@@ -26,8 +24,8 @@ var (
 )
 
 func init() {
-	initCfg(dbCfg.Mysql)
-
+	InitCfg(&mysqlCfg, dbCfg.Mysql)
+	logger.Debugf("Mysql config: %s", mysqlCfg)
 }
 
 func initGormMysql() {
@@ -82,14 +80,4 @@ func ConnRedis() *redis.Client {
 		initRedis()
 	}
 	return redisClient
-}
-
-func initCfg(cfgStruct interface{}) {
-	t, v := reflect.TypeOf(cfgStruct), reflect.ValueOf(cfgStruct)
-	for k := 0; k < t.NumField(); k++ {
-		r, _ := regexp.Compile(t.Field(k).Name)
-		mysqlCfg = r.ReplaceAllString(mysqlCfg, fmt.Sprintf(
-			"%v", v.Field(k).Interface()))
-	}
-	logger.Debug(mysqlCfg)
 }
