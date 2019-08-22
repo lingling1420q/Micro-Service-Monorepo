@@ -3,7 +3,10 @@ FROM golang:latest
 
 WORKDIR /server
 COPY . /server
-RUN  go build -x -o /server/build/server
+
+ENV GOPROXY="https://goproxy.io"
+RUN go mod download
+RUN go build -x -o /server/build/server
 
 EXPOSE 8080
 
