@@ -1,9 +1,9 @@
 package grpc
 
 import (
+	pb "gin-demo/grpc/protoes"
 	"log"
 	"net"
-	pb "server/protoes"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
