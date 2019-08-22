@@ -5,6 +5,6 @@
 
 *.log
 
-!vendor
-vendor/*
-!vendor/modules.txt
+# !vendor
+# vendor/*
+# !vendor/modules.txt
