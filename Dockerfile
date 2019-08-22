@@ -1,5 +1,4 @@
-# TODO: complete docker file
-# docker build -t gin-demo .
+# docker build -t 17199911145/gin-demo .
 FROM golang:latest
 
 WORKDIR /server
