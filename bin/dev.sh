@@ -28,6 +28,15 @@ function check_process {
     fi
 }
 
+update_api_doc () {
+    $ROOT_DIR/bin/swag init
+}
+
+start_server_hot () {
+    update_api_doc
+    $ROOT_DIR/bin/fresh
+}
+
 stop_process () {
     echo "stop process of "$1
     _PID=`ps ufx | grep "$1" | awk '{print $2}'`
@@ -85,7 +94,7 @@ case ${ARGS[0]} in
             *)          print_help ;;
         esac ;;
     run)
-        $ROOT_DIR/bin/fresh ;;
+        start_server_hot ;;
     build)
         build_server ;;
     *)

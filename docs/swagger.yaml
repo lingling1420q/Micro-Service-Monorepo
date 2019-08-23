@@ -1,0 +1,14 @@
+info:
+  contact: {}
+  license: {}
+paths:
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: Add a new user
+      produces:
+      - application/json
+      tags:
+      - user
+swagger: "2.0"

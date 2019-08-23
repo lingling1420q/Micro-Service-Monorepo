@@ -1,18 +1,23 @@
 package api1
 
 import (
-	db "gin-demo/db"
 	"log"
 	http "net/http"
 
 	gin "github.com/gin-gonic/gin"
 )
 
-// Index ...
+// Index ...// @Summary Add new user to the database
+// @Description Add a new user
+// @Tags user
+// @Accept  json
+// @Produce  json
+// @Router /user [post]
 func Index(c *gin.Context) {
-	conn := db.ConnMysql()
-	log.Println(conn)
-	c.String(http.StatusOK, "hello, index, api1")
+	// conn := db.ConnMysql()
+	// log.Println(conn)
+	// c.String(http.StatusOK, "hello, index, api1")
+	c.HTML(http.StatusOK, "doc/index.html", nil)
 }
 
 //Helloworld ...
