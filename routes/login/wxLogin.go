@@ -11,7 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//Wx user login
 func Wx(c *gin.Context) {
 	wxConf := config.Config().Wechat
 	queryMap := c.Request.URL.Query()

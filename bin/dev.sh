@@ -29,7 +29,7 @@ function check_process {
 }
 
 update_api_doc () {
-    $ROOT_DIR/bin/swag init
+    $ROOT_DIR/bin/swag init -d $ROOT_DIR
 }
 
 start_server_hot () {

@@ -9,16 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-/**
- * @api {get} /user/:id Request User information
- * @apiName GetUser
- * @apiGroup User
- *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- */
 //AddUser add user to db
 func AddUser(c *gin.Context) {
 	name := c.PostForm("name")
@@ -37,16 +27,6 @@ func AddUser(c *gin.Context) {
 
 }
 
-/**
- * @api {get} /user2/:id Request User information
- * @apiName GetUser1
- * @apiGroup User1
- *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- */
 //GetUserInfo  get user info by name
 func GetUserInfo(c *gin.Context) {
 	gormConn := db.ConnGormMysql()
