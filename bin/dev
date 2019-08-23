@@ -117,7 +117,7 @@ case ${ARGS[0]} in
         build_server ;;
     logs)
         case ${ARGS[1]} in
-            server)     tail -f $ROOT_DIR/tmp/server.out ;;
+            server)     tail -f $ROOT_DIR/tmp/$SERVER.out ;;
             *)          pring_help ;;
         esac ;;
     *)
