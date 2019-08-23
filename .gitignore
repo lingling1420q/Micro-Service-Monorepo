@@ -9,6 +9,5 @@
 
 # docs
 
-!vendor
-vendor/*
 !vendor/modules.txt
+vendor
