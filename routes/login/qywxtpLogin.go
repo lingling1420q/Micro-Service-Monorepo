@@ -6,10 +6,7 @@ import (
 	"gin-demo/defs"
 	"gin-demo/logger"
 	"gin-demo/utils"
-	"net/http"
 	"net/url"
-
-	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -17,10 +14,17 @@ var (
 	code     string
 )
 
+// GetSuiteTokenRes get suite token resp
+type GetSuiteTokenRes struct {
+	// Errcode          int    `json:errcode`
+	// Errmsg           string `json:errmsg`
+	SuiteAccessToken string `json:"suite_access_token"`
+	ExpiresIn        int    `json:"expires_in"`
+}
+
 //QywxThirdParty third party login
-func QywxThirdParty(c *gin.Context) {
+func QywxThirdParty(queryMap url.Values) string {
 	//获取url中的参数
-	queryMap := c.Request.URL.Query()
 	code = queryMap.Get("code")
 	logger.Debug(queryMap.Get("code"))
 	//构造post请求参数
@@ -35,7 +39,7 @@ func QywxThirdParty(c *gin.Context) {
 	if err != nil {
 		//handle error
 		logger.Error(defs.ParseToJSONErr, err)
-		return
+		return ""
 	}
 	logger.Notice("paramJSON: ", string(paramJSON))
 
@@ -46,15 +50,15 @@ func QywxThirdParty(c *gin.Context) {
 	resp, err := utils.HTTPPost(qywxConf.ThirdParty.SuiteTokenURL, string(paramJSON))
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
 	logger.Debug(resp)
 	userInfo, err := getUserInfo(resp)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
-	c.String(http.StatusOK, userInfo)
+	return userInfo
 }
 
 // 服务商服务器以code换取 用户唯一标识 userid 、用户所在企业corpid 和 会话密钥 session_key。

@@ -6,16 +6,20 @@ import (
 	"gin-demo/defs"
 	"gin-demo/logger"
 	"gin-demo/utils"
-	"net/http"
 	"net/url"
-
-	"github.com/gin-gonic/gin"
 )
 
+//GetTokenRes get tokrn response
+type GetTokenRes struct {
+	Errcode     int    `json:"errcode"`
+	Errmsg      string `json:"errmsg"`
+	AccessToken string `json:"access_token"`
+	ExpiresIn   int    `json:"expires_in"`
+}
+
 //Qywx user login
-func Qywx(c *gin.Context) {
+func Qywx(queryMap url.Values) string {
 	qywxConf := config.Config().QyWechat
-	queryMap := c.Request.URL.Query()
 
 	//企业内部开发 获取token
 	//https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRECT
@@ -28,7 +32,7 @@ func Qywx(c *gin.Context) {
 	resp, err := utils.HTTPGet(urlGetToken)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
 	getTokenRes := GetTokenRes{}
 	json.Unmarshal([]byte(resp), &getTokenRes)
@@ -47,16 +51,15 @@ func Qywx(c *gin.Context) {
 	url, err := utils.EncodeURL(qywxConf.WechatURL, reqParams)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
 	logger.Notice(url)
 
 	resp, err = utils.HTTPGet(url)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
-
 	logger.Debug(resp)
-	c.String(http.StatusOK, resp)
+	return resp
 }

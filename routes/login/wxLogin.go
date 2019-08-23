@@ -5,15 +5,11 @@ import (
 	"gin-demo/defs"
 	"gin-demo/logger"
 	"gin-demo/utils"
-	"net/http"
 	"net/url"
-
-	"github.com/gin-gonic/gin"
 )
 
-func Wx(c *gin.Context) {
+func Wx(queryMap url.Values) string {
 	wxConf := config.Config().Wechat
-	queryMap := c.Request.URL.Query()
 	reqParams := url.Values{
 		"appid":      {wxConf.Appid},
 		"secret":     {wxConf.Secret},
@@ -24,15 +20,15 @@ func Wx(c *gin.Context) {
 	url, err := utils.EncodeURL(wxConf.WechatURL, reqParams)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
 	logger.Notice(url)
 
 	resp, err := utils.HTTPGet(url)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
-		return
+		return ""
 	}
 	logger.Debug(resp)
-	c.String(http.StatusOK, resp)
+	return resp
 }
