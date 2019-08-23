@@ -53,7 +53,7 @@ start_server_hot () {
 stop_process () {
     red "Stop Process of "$1
     _PID=`ps ufx | grep "$1" | awk '{print $2}'`
-    echo "$_PID"|while read pid
+    echo "$_PID" | while read pid
     do
         if [ "$pid" != "" ]; then
             echo "kill process $pid"
@@ -68,8 +68,8 @@ stop_process () {
 
 remove_file () {
     if [ -f "$1" ]; then
-    echo "$1 exist"
-    rm -rf $1
+        echo "$1 exist"
+        rm -rf $1
     fi
 }
 
