@@ -14,10 +14,7 @@ import (
 // @Produce  json
 // @Router /user [post]
 func Index(c *gin.Context) {
-	// conn := db.ConnMysql()
-	// log.Println(conn)
-	// c.String(http.StatusOK, "hello, index, api1")
-	c.HTML(http.StatusOK, "doc/index.html", nil)
+	c.String(http.StatusOK, "hello, index, api1")
 }
 
 //Helloworld ...

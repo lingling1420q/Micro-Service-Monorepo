@@ -3,8 +3,6 @@ package api1
 import gin "github.com/gin-gonic/gin"
 
 func Route(r *gin.Engine) {
-	r.LoadHTMLFiles("doc/index.html")
-
 	router := r.Group("/api1")
 	{
 		router.GET("/", Index)
