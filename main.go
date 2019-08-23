@@ -15,31 +15,18 @@ func init() {
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 }
 
-/**
- * @api {get} /test/:id Test api doc
- * @apiName GetUser
- * @apiGroup HAHA
- *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "UserNotFound"
- *     }
- */
+// @title Demo Gin Server API
+// @version 1.0
+
+// @contact.name API Support
+// @contact.url https://github.com/luxuze/demo-gin-server
+// @contact.email luxuze1994@gmial.com
+
+// @license.name DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+// @license.url https://github.com/luxuze/demo-gin-server/blob/master/LICENSE
+
+// @host www.luxuze.club:8080
+// @BasePath /
 func main() {
 	/* loading toml configs */
 	cfg := config.Config()
