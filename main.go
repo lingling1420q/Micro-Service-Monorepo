@@ -25,7 +25,7 @@ func init() {
 // @license.name DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 // @license.url https://github.com/luxuze/demo-gin-server/blob/master/LICENSE
 
-// @host www.luxuze.club:8080
+// @host localhost:8080
 // @BasePath /
 func main() {
 	/* loading toml configs */

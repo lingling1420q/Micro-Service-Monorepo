@@ -13,7 +13,120 @@
         },
         "version": "1.0"
     },
-    "host": "www.luxuze.club:8080",
+    "host": "localhost:8080",
     "basePath": "/",
-    "paths": {}
+    "paths": {
+        "/login/register": {
+            "post": {
+                "description": "add user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "user",
+                "parameters": [
+                    {
+                        "description": "add user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/db.TBL_USERS"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/db.TBL_USERS"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/defs.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/wx": {
+            "get": {
+                "description": "Request WX get resp",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "WX"
+                ],
+                "summary": "Wx",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "123",
+                        "description": "Request WX",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "db.TBL_USERS": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "may"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "pwd": {
+                    "type": "string",
+                    "example": "123"
+                }
+            }
+        },
+        "defs.HTTPError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status bad request"
+                }
+            }
+        }
+    }
 }

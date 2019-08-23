@@ -11,6 +11,7 @@ require (
 	github.com/golang/protobuf v1.3.2 // indirect
 	github.com/jinzhu/gorm v1.9.10
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
+	github.com/satori/go.uuid v1.2.0
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.5.1

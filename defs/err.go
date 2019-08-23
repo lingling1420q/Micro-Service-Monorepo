@@ -12,3 +12,9 @@ var (
 	// ConnDBErr connect db err
 	ConnDBErr = "Errored when connecting to db"
 )
+
+// HTTPError example
+type HTTPError struct {
+	Code    int    `json:"code" example:"400"`
+	Message string `json:"message" example:"status bad request"`
+}

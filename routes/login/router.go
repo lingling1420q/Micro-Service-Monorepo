@@ -2,6 +2,7 @@ package login
 
 import (
 	"net/http"
+	_ "net/url"
 
 	gin "github.com/gin-gonic/gin"
 )
@@ -20,6 +21,15 @@ func Route(r *gin.Engine) {
 
 type controller struct{}
 
+// CtrlWx godoc
+// @Summary Wx
+// @Description Request WX get resp
+// @Tags WX
+// @Accept  json
+// @Produce  json
+// @Param  code query string true "Request WX" default(123)
+// @Success 200 string string
+// @Router /wx [get]
 func (*controller) ctrlWx(c *gin.Context) {
 	queryMap := c.Request.URL.Query()
 	c.String(http.StatusOK, Wx(queryMap))

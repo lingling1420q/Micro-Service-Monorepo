@@ -9,11 +9,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Add user godoc
+// @Summary user
+// @Description add user
+// @Tags user
+// @Accept  json
+// @Produce  json
+// @Param  user  body db.TBL_USERS true "add user"
+// @Success 200 {object} db.TBL_USERS
+// @Failure 400 {object} defs.HTTPError
+// @Router /login/register [post]
 //AddUser add user to db
 func AddUser(c *gin.Context) {
 	name := c.PostForm("name")
 	pwd := c.PostForm("pwd")
-
+	logger.Debug(name)
 	gormConn := db.ConnGormMysql()
 	// 构建User
 	user := db.TBL_USERS{Name: name, Pwd: pwd}
