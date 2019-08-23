@@ -1,0 +1,14 @@
+basePath: /
+host: www.luxuze.club:8080
+info:
+  contact:
+    email: luxuze1994@gmial.com
+    name: API Support
+    url: https://github.com/luxuze/demo-gin-server
+  license:
+    name: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+    url: https://github.com/luxuze/demo-gin-server/blob/master/LICENSE
+  title: Demo Gin Server API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
