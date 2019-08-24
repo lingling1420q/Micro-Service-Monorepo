@@ -2,6 +2,7 @@ package login
 
 import (
 	db "gin-demo/db"
+	"gin-demo/defs"
 	"gin-demo/logger"
 
 	"net/http"
@@ -21,19 +22,18 @@ import (
 // @Router /login/register [post]
 //AddUser add user to db
 func AddUser(c *gin.Context) {
-	name := c.PostForm("name")
-	pwd := c.PostForm("pwd")
-	logger.Debug(name)
-	gormConn := db.ConnGormMysql()
-	// 构建User
-	user := db.TBL_USERS{Name: name, Pwd: pwd}
-	// 存入数据库
-	gormConn.Create(&user)
-
-	c.JSON(http.StatusOK, gin.H{
-		"name": name,
-		"pwd":  pwd,
-	})
+	var userParam db.TBL_USERS
+	//bind struct param
+	if err := c.ShouldBindJSON(&userParam); err != nil {
+		defs.NewError(c, http.StatusBadRequest, err)
+		return
+	}
+	user := db.TBL_USERS{
+		Name: userParam.Name,
+		Pwd:  userParam.Pwd,
+	}
+	user.Insert()
+	c.JSON(http.StatusOK, user)
 
 }
 

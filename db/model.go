@@ -7,3 +7,9 @@ type TBL_USERS struct {
 	Phone string `gorm:"size:11"  json:"phone,omitempty"`
 	Email string `gorm:"size:25"  json:"email,omitempty"`
 }
+
+func (tbl_user *TBL_USERS) Insert() {
+	gormConn := ConnGormMysql()
+	gormConn.Create(&tbl_user)
+
+}
