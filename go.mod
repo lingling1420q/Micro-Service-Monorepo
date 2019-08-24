@@ -11,13 +11,9 @@ require (
 	github.com/go-redis/redis v6.15.3+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.2 // indirect
-	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/jinzhu/gorm v1.9.10
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
-	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
-	github.com/pilu/config v0.0.0-20131214182432-3eb99e6c0b9a // indirect
-	github.com/pilu/fresh v0.0.0-20170301142741-9c0092493eff // indirect
 	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0

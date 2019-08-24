@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export GOPROXY="https://goproxy.io"
+export GOPATH="$HOME/go"
+
 ROOT_DIR=${ROOT_DIR:-$(git rev-parse --show-toplevel)}
 SERVER=${PWD##*/}
 
@@ -30,13 +33,19 @@ function check_process {
 }
 
 update_api_doc () {
-    ~/go/bin/swag init -d $ROOT_DIR
+    $GOPATH/bin/swag init -d $ROOT_DIR
     green "Update Api Document SUCCESS"
 }
 
+install_go_dependency () {
+    go get -u -v github.com/swaggo/swag/cmd/swag
+    go get -u -v github.com/pilu/fresh
+}
+
 start_server () {
+    install_go_dependency
     update_api_doc
-    nohup ~/go/bin/fresh -c $ROOT_DIR/config/runner.conf >> $ROOT_DIR/tmp/$SERVER.out 2>&1 &
+    nohup $GOPATH/bin/fresh -c $ROOT_DIR/config/runner.conf >> $ROOT_DIR/tmp/$SERVER.out 2>&1 &
     check_process $SERVER
 }
 
