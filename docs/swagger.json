@@ -1,6 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
+        "description": "{{.Description}}",
         "title": "Demo Gin Server API",
         "contact": {
             "name": "API Support",
@@ -45,12 +46,14 @@
                     "200": {
                         "description": "OK",
                         "schema": {
+                            "type": "object",
                             "$ref": "#/definitions/db.TBL_USERS"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
+                            "type": "object",
                             "$ref": "#/definitions/defs.HTTPError"
                         }
                     }

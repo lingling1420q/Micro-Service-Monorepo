@@ -30,24 +30,19 @@ function check_process {
 }
 
 update_api_doc () {
-    $ROOT_DIR/bin/swag init -d $ROOT_DIR
+    ~/go/bin/swag init -d $ROOT_DIR
     green "Update Api Document SUCCESS"
 }
 
 start_server () {
-    build_server
-    nohup $ROOT_DIR/build/$SERVER >> $ROOT_DIR/tmp/$SERVER.out 2>&1 &
+    update_api_doc
+    nohup ~/go/bin/fresh -c $ROOT_DIR/config/runner.conf >> $ROOT_DIR/tmp/$SERVER.out 2>&1 &
     check_process $SERVER
 }
 
 stop_server () {
     stop_process $SERVER
     red "Stop Server SUCCESS"
-}
-
-start_server_hot () {
-    update_api_doc
-    $ROOT_DIR/bin/fresh
 }
 
 stop_process () {
@@ -93,8 +88,7 @@ print_help () {
     echo  "#"
     echo  "# All avaiable targets are list as follow:"
     echo  "#   all         All services at once"
-    green "#   dev         Dev server auto refresh when file changed"
-    green "#   server      Run or kill Server Backup"
+    green "#   server      Run or kill Server Backup, Dev Server auto refresh when file changed"
     echo  "#"
     echo  "# use 'dev help' to list all available comamnds"
     echo  "#*-----------------------------------------------------------------------------"
@@ -104,7 +98,6 @@ print_help () {
 case ${ARGS[0]} in
     start)
         case ${ARGS[1]} in
-            dev)        start_server_hot ;;
             server)     start_server ;;
             *)          print_help ;;
         esac ;;
