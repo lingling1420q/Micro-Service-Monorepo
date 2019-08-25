@@ -12,19 +12,19 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
 
-function red {
+function red() {
     echo -e "${RED}$1${NC}"
 }
 
-function green {
+function green() {
     echo -e "${GREEN}$1${NC}"
 }
 
-function check_process {
+function check_process() {
     if (($?)); then
         red "Start $1 ERROR"
         if [[ $2 ]]; then
-            `$2`
+            $($2)
         fi
         exit 1
     else
@@ -32,33 +32,32 @@ function check_process {
     fi
 }
 
-update_api_doc () {
+update_api_doc() {
     $GOPATH/bin/swag init -d $ROOT_DIR
     green "Update Api Document SUCCESS"
 }
 
-install_go_dependency () {
+install_go_dependency() {
     go get -u -v github.com/swaggo/swag/cmd/swag
     go get -u -v github.com/pilu/fresh
 }
 
-start_server () {
+start_server() {
     install_go_dependency
     update_api_doc
-    nohup $GOPATH/bin/fresh -c $ROOT_DIR/config/runner.conf >> $ROOT_DIR/tmp/$SERVER.out 2>&1 &
+    nohup $GOPATH/bin/fresh -c $ROOT_DIR/config/runner.conf >>$ROOT_DIR/tmp/$SERVER.out 2>&1 &
     check_process $SERVER
 }
 
-stop_server () {
+stop_server() {
     stop_process $SERVER
     red "Stop Server SUCCESS"
 }
 
-stop_process () {
+stop_process() {
     red "Stop Process of "$1
-    _PID=`ps ufx | grep "$1" | awk '{print $2}'`
-    echo "$_PID" | while read pid
-    do
+    _PID=$(ps ufx | grep "$1" | awk '{print $2}')
+    echo "$_PID" | while read pid; do
         if [ "$pid" != "" ]; then
             echo "kill process $pid"
             kill $pid
@@ -70,7 +69,7 @@ stop_process () {
     echo "Done."
 }
 
-remove_file () {
+remove_file() {
     if [ -f "$1" ]; then
         echo "$1 exist"
         rm -rf $1
@@ -85,43 +84,47 @@ build_server() {
     green "Build Server SUCESS"
 }
 
-print_help () {
-    echo  "#*-----------------------------------------------------------------------------"
-    echo  "# Usage: dev [start/stop/build] <target>"
-    echo  "#"
-    echo  "# Mandatory arguments:"
+print_help() {
+    echo "#*-----------------------------------------------------------------------------"
+    echo "# Usage: dev [start/stop/build] <target>"
+    echo "#"
+    echo "# Mandatory arguments:"
     green "#   start:              start component"
     green "#   stop:               kill component"
     green "#   logs:               show component logs fresh runtime"
-    echo  "#   build:              build a native file to repo/build/"
-    echo  "#"
-    echo  "# All avaiable targets are list as follow:"
-    echo  "#   all         All services at once"
+    echo "#   build:              build a native file to repo/build/"
+    echo "#"
+    echo "# All avaiable targets are list as follow:"
+    echo "#   all         All services at once"
     green "#   server      Run or kill Server Backup, Dev Server auto refresh when file changed"
-    echo  "#"
-    echo  "# use 'dev help' to list all available comamnds"
-    echo  "#*-----------------------------------------------------------------------------"
+    echo "#"
+    echo "# use 'dev help' to list all available comamnds"
+    echo "#*-----------------------------------------------------------------------------"
 }
 
-
 case ${ARGS[0]} in
-    start)
-        case ${ARGS[1]} in
-            server)     start_server ;;
-            *)          print_help ;;
-        esac ;;
-    stop)
-        case ${ARGS[1]} in
-            server)     stop_server ;;
-            *)          print_help ;;
-        esac ;;
-    build)
-        build_server ;;
-    logs)
-        case ${ARGS[1]} in
-            server)     tail -f $ROOT_DIR/tmp/$SERVER.out ;;
-            *)          pring_help ;;
-        esac ;;
-    *)
-        print_help ;;
+start)
+    case ${ARGS[1]} in
+    server) start_server ;;
+    *) print_help ;;
+    esac
+    ;;
+stop)
+    case ${ARGS[1]} in
+    server) stop_server ;;
+    *) print_help ;;
+    esac
+    ;;
+build)
+    build_server
+    ;;
+logs)
+    case ${ARGS[1]} in
+    server) tail -f $ROOT_DIR/tmp/$SERVER.out ;;
+    *) pring_help ;;
+    esac
+    ;;
+*)
+    print_help
+    ;;
 esac
