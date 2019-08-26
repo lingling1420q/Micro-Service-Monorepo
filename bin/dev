@@ -56,7 +56,7 @@ stop_server() {
 
 stop_process() {
     red "Stop Process of "$1
-    _PID=$(ps ufx | grep "$1" | awk '{print $2}')
+    _PID=$(ps -ef | grep "$1" | grep -v grep | awk '{print $2}')
     echo "$_PID" | while read pid; do
         if [ "$pid" != "" ]; then
             echo "kill process $pid"
