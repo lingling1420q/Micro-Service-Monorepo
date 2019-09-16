@@ -16,6 +16,7 @@ func Route(r *gin.Engine) {
 		router.GET("/qywxtp", ctrl.ctrlQywxThirdParty)
 		router.POST("/register", AddUser)
 		router.GET("/get/:name", GetUserInfo)
+		router.GET("/getQR", GetQR)
 	}
 }
 
