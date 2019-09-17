@@ -17,7 +17,7 @@ Debug = true
   dbName = 0
 
 [server]
-port = ":8080"
+port = ":4096"
 
 [wechat]
 wechatURL = "https://api.weixin.qq.com/sns/jscode2session"
