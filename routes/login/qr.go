@@ -17,8 +17,14 @@ import (
 
 func GetQR(c *gin.Context) {
 	// 获取access token
-	//resp := getAccessToken()
-	//logger.Debug(resp)
+	resp := getAccessToken()
+	logger.Debug(resp)
+	m := make(map[string]interface{})
+	err := json.Unmarshal([]byte(resp), &m)
+	if err != nil {
+		logger.Error(err)
+	}
+	accessToken := m["access_token"].(string)
 	// 获取二维码
 	// POST https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN
 	// 构造请求参数
@@ -34,7 +40,7 @@ func GetQR(c *gin.Context) {
 	}
 	logger.Notice("paramJSON: ", string(paramJSON))
 	// 获取小程序二维码
-	qrResp, err := utils.HTTPPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=25_2wHL_H9SequEPv0g3Fsojv5WRTaVBHYV63L1GYpwn94UQqQ-WVv-Amnl307KlqaOWxfOAqcnx4nvnlmsZSQiKy__QDkKWB9BR0S3Ew_lHN1jBGsuXLgdSStmDEKn2UMAaSvKyF6O0C0CsAPSBESiAJAILZ", string(paramJSON))
+	qrResp, err := utils.HTTPPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="+accessToken, string(paramJSON))
 	if err != nil {
 		logger.Error("get qr error")
 	}
