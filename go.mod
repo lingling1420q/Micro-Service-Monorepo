@@ -5,6 +5,7 @@ go 1.12.6
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc
+	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-openapi/jsonreference v0.19.3 // indirect
 	github.com/go-openapi/spec v0.19.3 // indirect
@@ -27,9 +28,9 @@ require (
 	github.com/tencentyun/cos-go-sdk-v5 v0.0.0-20190904131008-532ae946256d
 	github.com/urfave/cli v1.22.1 // indirect
 	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586 // indirect
-	golang.org/x/net v0.0.0-20190912160710-24e19bdeb0f2
-	golang.org/x/sys v0.0.0-20190913121621-c3b328c6e5a7 // indirect
-	golang.org/x/tools v0.0.0-20190916020655-1ccc110ba9df // indirect
+	golang.org/x/net v0.0.0-20190923162816-aa69164e4478
+	golang.org/x/sys v0.0.0-20190924154521-2837fb4f24fe // indirect
+	golang.org/x/tools v0.0.0-20190924233335-3af846175935 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/grpc v1.19.0
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0

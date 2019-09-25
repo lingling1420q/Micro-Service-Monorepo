@@ -9,7 +9,7 @@ import (
 
 func IndexGet(c *gin.Context) {
 	query := c.Request.URL.Query()
-	logger.Info(query)
+	logger.Notice(query)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "pong",
 	})
@@ -17,11 +17,11 @@ func IndexGet(c *gin.Context) {
 
 func IndexPost(c *gin.Context) {
 	query := c.Request.URL.Query()
-	logger.Infof("Query: %v", query)
+	logger.Noticef("Query: %v\r\n", query)
 	c.Request.ParseForm()
-	logger.Infof("JsonForm: %v", c.Request.PostForm )
+	logger.Noticef("JsonForm: %v\r\n", c.Request.PostForm )
 	data, _ := ioutil.ReadAll(c.Request.Body)
-	logger.Infof("BodyForm: %v", string(data))
+	logger.Noticef("BodyForm: %v\r\n", string(data))
 	c.JSON(http.StatusOK, gin.H{
 		"message": "pong",
 	})
