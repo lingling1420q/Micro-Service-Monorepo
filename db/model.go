@@ -1,9 +1,18 @@
 package db
 
-import "time"
+import (
+	"github.com/jinzhu/gorm"
+)
+
+// type Model struct {
+// 	ID        uint      `gorm:"primary_key; AUTO_INCREMENT"  json:"id,omitempty" example:"1"`
+// 	CreatedAt time.Time `gorm:"column:created_at;not null;default:CURRENT_TIMESTAMP"`
+// 	UpdatedAt time.Time `gorm:"column:updated_at;not null;default:CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"`
+// DeletedAt *time.Time
+// }
 
 type TBL_USERS struct {
-	ID    uint   `gorm:"primary_key; AUTO_INCREMENT"  json:"id,omitempty" example:"1"`
+	gorm.Model
 	Name  string `gorm:"unique_index; size:15"  json:"name,omitempty" example:"may"`
 	Pwd   string `gorm:"default:'123456'; size:20"  json:"pwd,omitempty" example:"123"`
 	Phone string `gorm:"size:11"  json:"phone,omitempty"`
@@ -17,15 +26,13 @@ func (tbl_user *TBL_USERS) Insert() {
 }
 
 type TBL_VISIT_LOG struct {
-	Host      string
-	Query     string `gorm:"type:text"`
-	Body      string `gorm:"type:text"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	gorm.Model
+	Host  string
+	Query string `gorm:"type:text"`
+	Body  string `gorm:"type:text"`
 }
 
 func (tvl *TBL_VISIT_LOG) Insert() {
 	gormConn := ConnGormMysql()
 	gormConn.Create(&tvl)
-
 }
