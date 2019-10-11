@@ -32,7 +32,7 @@ func AddUser(c *gin.Context) {
 		Name: userParam.Name,
 		Pwd:  userParam.Pwd,
 	}
-	user.Insert()
+	db.InsertColume(&user)
 	c.JSON(http.StatusOK, user)
 
 }

@@ -19,20 +19,9 @@ type TBL_USERS struct {
 	Email string `gorm:"size:25"  json:"email,omitempty"`
 }
 
-func (tbl_user *TBL_USERS) Insert() {
-	gormConn := ConnGormMysql()
-	gormConn.Create(&tbl_user)
-
-}
-
 type TBL_VISIT_LOG struct {
 	gorm.Model
 	Host  string
 	Query string `gorm:"type:text"`
 	Body  string `gorm:"type:text"`
-}
-
-func (tvl *TBL_VISIT_LOG) Insert() {
-	gormConn := ConnGormMysql()
-	gormConn.Create(&tvl)
 }

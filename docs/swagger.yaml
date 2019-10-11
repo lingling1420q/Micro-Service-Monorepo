@@ -4,9 +4,6 @@ definitions:
     properties:
       email:
         type: string
-      id:
-        example: 1
-        type: integer
       name:
         example: may
         type: string

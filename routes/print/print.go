@@ -32,7 +32,7 @@ func IndexPost(c *gin.Context) {
 		Query: "query",
 		Body:  string(data),
 	}
-	vl.Insert()
+	db.InsertColume(&vl)
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "pong",
