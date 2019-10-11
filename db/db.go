@@ -35,7 +35,7 @@ func ConnGormMysql() *gorm.DB {
 		if err != nil {
 			logger.Error(defs.ConnDBErr, err.Error())
 		}
-		gormMysqlClient.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&TBL_USERS{})
+		gormMysqlClient.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&TBL_USERS{}, &TBL_VISIT_LOG{})
 		// 为`name`列添加索引`idx_user_name`
 		// gormMysqlClient.Model(&TBL_USERS{}).AddIndex("idx_user_name", "name")
 	}

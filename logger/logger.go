@@ -37,6 +37,7 @@ func init() {
 	// For demo purposes, create two backend for os.Stderr.
 	console := logging.NewLogBackend(os.Stderr, "", 0)
 	fileBackend := logging.NewLogBackend(&lumberjack.Logger{
+		// TODO: move log to toml config file
 		Filename: "./tmp/logs/gin.log",
 		MaxSize:  2,    // megabytes
 		Compress: true, // disabled by default

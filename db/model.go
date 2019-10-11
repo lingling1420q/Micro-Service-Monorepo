@@ -1,5 +1,7 @@
 package db
 
+import "time"
+
 type TBL_USERS struct {
 	ID    uint   `gorm:"primary_key; AUTO_INCREMENT"  json:"id,omitempty" example:"1"`
 	Name  string `gorm:"unique_index; size:15"  json:"name,omitempty" example:"may"`
@@ -11,5 +13,19 @@ type TBL_USERS struct {
 func (tbl_user *TBL_USERS) Insert() {
 	gormConn := ConnGormMysql()
 	gormConn.Create(&tbl_user)
+
+}
+
+type TBL_VISIT_LOG struct {
+	Host      string
+	Query     string `gorm:"type:text"`
+	Body      string `gorm:"type:text"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
+func (tvl *TBL_VISIT_LOG) Insert() {
+	gormConn := ConnGormMysql()
+	gormConn.Create(&tvl)
 
 }
