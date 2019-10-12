@@ -21,7 +21,10 @@ type TBL_USERS struct {
 
 type TBL_VISIT_LOG struct {
 	gorm.Model
-	Host  string
-	Query string `gorm:"type:text"`
-	Body  string `gorm:"type:text"`
+	Host     string
+	Method   string
+	URL      string
+	Header   string `gorm:"type:text"`
+	Query    string `gorm:"type:text"`
+	JSONData string `gorm:"type:text"`
 }

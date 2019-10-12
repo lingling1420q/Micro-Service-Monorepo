@@ -1,8 +1,7 @@
-package print
+package index
 
 import gin "github.com/gin-gonic/gin"
 
 func Route(r *gin.Engine) {
-	r.GET("/", IndexGet)
-	r.POST("/", IndexPost)
+	r.Any("/", Index)
 }

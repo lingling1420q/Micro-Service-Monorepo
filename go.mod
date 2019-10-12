@@ -15,6 +15,7 @@ require (
 	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
+	github.com/satori/go.uuid v1.2.0
 	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
