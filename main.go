@@ -1,10 +1,10 @@
 package main
 
 import (
+	"log"
 	config "monaco/config"
 	logger "monaco/logger"
 	routes "monaco/routes"
-	"log"
 	"net/http"
 	"time"
 
@@ -15,17 +15,17 @@ func init() {
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 }
 
-// @title Demo Gin Server API
-// @version 1.0
+// @title Web Server Framework API
+// @version 1.0.1
 
 // @contact.name API Support
-// @contact.url https://github.com/luxuze/demo-gin-server
-// @contact.email luxuze1994@gmial.com
+// @contact.url https://github.com/luxuze/Web-Server-Framework-Golang
+// @contact.email luxuze@agora.io
 
 // @license.name DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-// @license.url https://github.com/luxuze/demo-gin-server/blob/master/LICENSE
+// @license.url https://github.com/luxuze/Web-Server-Framework-Golang/blob/master/LICENSE
 
-// @host localhost:8080
+// @host localhost:4096
 // @BasePath /
 func main() {
 	/* loading toml configs */
