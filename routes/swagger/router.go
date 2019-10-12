@@ -1,7 +1,7 @@
 package swagger
 
 import (
-	_ "gin-demo/docs" /* doc files */
+	_ "monaco/docs" /* doc files */
 
 	gin "github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files

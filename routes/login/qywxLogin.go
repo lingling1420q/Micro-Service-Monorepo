@@ -2,10 +2,10 @@ package login
 
 import (
 	"encoding/json"
-	config "gin-demo/config"
-	"gin-demo/defs"
-	"gin-demo/logger"
-	"gin-demo/utils"
+	config "monaco/config"
+	"monaco/defs"
+	"monaco/logger"
+	"monaco/utils"
 	"net/url"
 )
 

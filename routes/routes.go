@@ -1,12 +1,12 @@
 package routes
 
 import (
-	api1 "gin-demo/routes/api1"
-	api2 "gin-demo/routes/api2"
-	login "gin-demo/routes/login"
-	mw "gin-demo/routes/middleware"
-	index "gin-demo/routes/index"
-	doc "gin-demo/routes/swagger"
+	api1 "monaco/routes/api1"
+	api2 "monaco/routes/api2"
+	login "monaco/routes/login"
+	mw "monaco/routes/middleware"
+	index "monaco/routes/index"
+	doc "monaco/routes/swagger"
 
 	gin "github.com/gin-gonic/gin"
 )

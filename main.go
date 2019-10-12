@@ -1,9 +1,9 @@
 package main
 
 import (
-	config "gin-demo/config"
-	logger "gin-demo/logger"
-	routes "gin-demo/routes"
+	config "monaco/config"
+	logger "monaco/logger"
+	routes "monaco/routes"
 	"log"
 	"net/http"
 	"time"

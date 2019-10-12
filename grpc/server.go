@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	pb "gin-demo/grpc/protoes"
+	pb "monaco/grpc/protoes"
 	"log"
 	"net"
 

@@ -1,9 +1,9 @@
 package login
 
 import (
-	db "gin-demo/db"
-	"gin-demo/defs"
-	"gin-demo/logger"
+	db "monaco/db"
+	"monaco/defs"
+	"monaco/logger"
 
 	"net/http"
 

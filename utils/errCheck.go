@@ -1,6 +1,6 @@
 package utils
 
-import "gin-demo/logger"
+import "monaco/logger"
 
 /*ErrorCheck check if there is an error  */
 func ErrorCheck(errMsg string, err error) {

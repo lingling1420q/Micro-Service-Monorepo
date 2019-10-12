@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"fmt"
-	"gin-demo/db"
-	"gin-demo/logger"
+	"monaco/db"
+	"monaco/logger"
 
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"

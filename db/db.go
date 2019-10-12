@@ -3,9 +3,9 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	config "gin-demo/config"
-	"gin-demo/defs"
-	logger "gin-demo/logger"
+	config "monaco/config"
+	"monaco/defs"
+	logger "monaco/logger"
 
 	"github.com/go-redis/redis"
 

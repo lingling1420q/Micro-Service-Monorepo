@@ -1,4 +1,4 @@
-# docker build -t 17199911145/gin-demo .
+# docker build -t 17199911145/monaco .
 FROM golang:latest
 
 WORKDIR /server

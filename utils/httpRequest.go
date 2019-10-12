@@ -3,8 +3,8 @@ package utils
 import (
 	"bytes"
 	"fmt"
-	"gin-demo/defs"
-	"gin-demo/logger"
+	"monaco/defs"
+	"monaco/logger"
 	"io/ioutil"
 	"net/http"
 )

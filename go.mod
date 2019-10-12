@@ -1,4 +1,4 @@
-module gin-demo
+module monaco
 
 go 1.12.6
 
