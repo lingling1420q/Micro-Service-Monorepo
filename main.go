@@ -28,21 +28,22 @@ func init() {
 // @host localhost:4096
 // @BasePath /
 func main() {
-	/* loading toml configs */
-	cfg := config.Config()
+	serverCfg := config.Config.Server
 
-	if !cfg.Debug {
+	if !serverCfg.Debug {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	logger.Noticef("gin is debug mode ? %v", cfg.Debug)
+	logger.Noticef("Gin is Running in Debug mode: %v", serverCfg.Debug)
 
 	s := &http.Server{
-		Addr:           cfg.Server.Port,
+		Addr:           serverCfg.Port,
 		Handler:        routes.InitRouter(),
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	logger.Noticef("Server Listing %s", cfg.Server.Port)
-	s.ListenAndServe()
+	logger.Noticef("Server Listing %s", serverCfg.Port)
+	if err := s.ListenAndServe(); err != nil {
+		logger.Errorf("Failed to Start Server: %s", err)
+	}
 }

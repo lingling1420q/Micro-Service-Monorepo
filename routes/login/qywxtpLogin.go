@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	qywxConf = config.Config().QyWechat
+	qywxConf = config.Config.QyWechat
 	code     string
 )
 

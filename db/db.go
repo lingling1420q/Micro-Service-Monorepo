@@ -18,9 +18,9 @@ var (
 	gormMysqlClient *gorm.DB
 	sqlClient       *sql.DB
 	redisClient     *redis.Client
-	dbCfg           = config.Config().DB
+	dbCfg           = config.Config.DB
 	err             error
-	mysqlCfg        = "Username:Password@tcp(Host:Port)/DbName?charset=utf8"
+	mysqlCfg        = "Username:Password@tcp(Host:Port)/DbName?parseTime=true"
 )
 
 func init() {

@@ -9,7 +9,7 @@ import (
 )
 
 func Wx(queryMap url.Values) string {
-	wxConf := config.Config().Wechat
+	wxConf := config.Config.Wechat
 	reqParams := url.Values{
 		"appid":      {wxConf.Appid},
 		"secret":     {wxConf.Secret},

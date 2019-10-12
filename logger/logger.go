@@ -26,7 +26,7 @@ var (
 )
 
 func init() {
-	cfg := config.Config()
+	cfg := config.Config
 	// Example format string. Everything except the message has a custom color
 	// which is dependent on the log level. Many fields have a custom output
 	// formatting too, eg. the time returns the hour down to the milli second.

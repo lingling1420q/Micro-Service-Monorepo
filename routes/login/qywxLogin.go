@@ -19,7 +19,7 @@ type GetTokenRes struct {
 
 //Qywx user login
 func Qywx(queryMap url.Values) string {
-	qywxConf := config.Config().QyWechat
+	qywxConf := config.Config.QyWechat
 
 	//企业内部开发 获取token
 	//https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRECT
