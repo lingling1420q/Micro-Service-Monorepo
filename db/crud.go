@@ -29,7 +29,6 @@ func (vl *TBL_VISIT_LOG) insert(c *gorm.DB) {
 
 func (vl *TBL_VISIT_LOG) find(c *gorm.DB) *gorm.DB {
 	return c.Where(&vl).Find(&TBL_VISIT_LOG{})
-
 }
 
 func (vl *TBL_VISIT_LOG) delete(c *gorm.DB) {
