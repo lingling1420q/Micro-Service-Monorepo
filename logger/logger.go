@@ -31,7 +31,7 @@ func init() {
 	// which is dependent on the log level. Many fields have a custom output
 	// formatting too, eg. the time returns the hour down to the milli second.
 	format := logging.MustStringFormatter(
-		`%{color}%{time} [%{level}] %{module} %{shortfile} > %{color:reset} %{message}`,
+		`%{color}%{time:2006-01-02 15:04:05} [%{level}] %{module} %{shortfile} ➥ %{color:reset} %{message}`,
 	)
 
 	// For demo purposes, create two backend for os.Stderr.
