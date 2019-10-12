@@ -18,6 +18,7 @@ Debug = true
 
 [server]
 port = ":4096"
+logPath = "./tmp/logs/gin.log"
 
 [wechat]
 wechatURL = "https://api.weixin.qq.com/sns/jscode2session"

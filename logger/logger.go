@@ -1,6 +1,7 @@
 package logger
 
 import (
+	config "monaco/config"
 	"os"
 
 	"github.com/op/go-logging"
@@ -25,20 +26,18 @@ var (
 )
 
 func init() {
-
+	cfg := config.Config()
 	// Example format string. Everything except the message has a custom color
 	// which is dependent on the log level. Many fields have a custom output
 	// formatting too, eg. the time returns the hour down to the milli second.
 	format := logging.MustStringFormatter(
 		`%{color}%{time} [%{level}] %{module} %{shortfile} > %{color:reset} %{message}`,
 	)
-	/* TODO bug: Aliyun log print in a wrong path */
 
 	// For demo purposes, create two backend for os.Stderr.
 	console := logging.NewLogBackend(os.Stderr, "", 0)
 	fileBackend := logging.NewLogBackend(&lumberjack.Logger{
-		// TODO: move log to toml config file
-		Filename: "./tmp/logs/gin.log",
+		Filename: cfg.Server.LogPath,
 		MaxSize:  2,    // megabytes
 		Compress: true, // disabled by default
 	}, "", 0)

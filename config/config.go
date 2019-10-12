@@ -47,7 +47,8 @@ type Database struct {
 }
 
 type server struct {
-	Port string
+	Port    string
+	LogPath string
 }
 
 type wechat struct {
