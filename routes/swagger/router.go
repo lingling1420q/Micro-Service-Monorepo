@@ -9,6 +9,8 @@ import (
 )
 
 func Route(r *gin.Engine) {
-	//TODO: redirect to index.html
 	r.GET("/doc/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/devdoc", func(c *gin.Context) {
+		c.Redirect(301, "/doc/index.html")
+	})
 }
