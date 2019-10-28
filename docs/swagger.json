@@ -1,19 +1,19 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Demo Gin Server API",
+        "title": "Web Server Framework API",
         "contact": {
             "name": "API Support",
-            "url": "https://github.com/luxuze/demo-gin-server",
-            "email": "luxuze1994@gmial.com"
+            "url": "https://github.com/luxuze/Web-Server-Framework-Golang",
+            "email": "luxuze@agora.io"
         },
         "license": {
             "name": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE",
-            "url": "https://github.com/luxuze/demo-gin-server/blob/master/LICENSE"
+            "url": "https://github.com/luxuze/Web-Server-Framework-Golang/blob/master/LICENSE"
         },
-        "version": "1.0"
+        "version": "1.0.1"
     },
-    "host": "localhost:8080",
+    "host": "localhost:4096",
     "basePath": "/",
     "paths": {
         "/login/register": {
