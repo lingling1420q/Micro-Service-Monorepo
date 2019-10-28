@@ -1,11 +1,12 @@
 package routes
 
 import (
+	agolet "monaco/routes/agolet"
 	api1 "monaco/routes/api1"
 	api2 "monaco/routes/api2"
+	index "monaco/routes/index"
 	login "monaco/routes/login"
 	mw "monaco/routes/middleware"
-	index "monaco/routes/index"
 	doc "monaco/routes/swagger"
 
 	gin "github.com/gin-gonic/gin"
@@ -28,5 +29,6 @@ func InitRouter() *gin.Engine {
 	login.Route(r)
 	api1.Route(r)
 	api2.Route(r)
+	agolet.Route(r)
 	return r
 }
