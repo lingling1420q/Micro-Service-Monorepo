@@ -38,7 +38,7 @@ func PostMsg() {
 		Text    textStruct `json:"text"`
 	}
 	text := textStruct{
-		Content: "hello world",
+		Content: "hello world !",
 	}
 	msg := &msgStruct{
 		ToUser:  "@all",
@@ -46,11 +46,11 @@ func PostMsg() {
 		AgentID: 1000002,
 		Text:    text,
 	}
-	bytesJsonMsg, _ := json.Marshal(msg)
+	bytesJSONMsg, _ := json.Marshal(msg)
 	tocken := GetTocken()
 	p := request.Parameters{
 		"access_token": tocken,
 	}
-	r, _ := request.POST("https://qyapi.weixin.qq.com/cgi-bin/message/send", p, bytesJsonMsg)
+	r, _ := request.POST("https://qyapi.weixin.qq.com/cgi-bin/message/send", p, bytesJSONMsg)
 	fmt.Println(string(r))
 }

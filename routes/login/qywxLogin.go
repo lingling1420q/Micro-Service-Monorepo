@@ -5,7 +5,7 @@ import (
 	config "monaco/config"
 	"monaco/defs"
 	"monaco/logger"
-	"monaco/utils"
+	"monaco/request"
 	"net/url"
 )
 
@@ -23,13 +23,11 @@ func Qywx(queryMap url.Values) string {
 
 	//企业内部开发 获取token
 	//https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRECT
-	reqTokenParam := url.Values{
-		"corpid":     {qywxConf.Corpid},
-		"corpsecret": {qywxConf.Secret},
+	reqTokenParam := request.Parameters{
+		"corpid":     qywxConf.Corpid,
+		"corpsecret": qywxConf.Secret,
 	}
-
-	urlGetToken, err := utils.EncodeURL(qywxConf.GetTokenURL, reqTokenParam)
-	resp, err := utils.HTTPGet(urlGetToken)
+	resp, err := request.GET(qywxConf.GetTokenURL, reqTokenParam)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
 		return ""
@@ -41,25 +39,17 @@ func Qywx(queryMap url.Values) string {
 	logger.Debug(token)
 
 	// https://qyapi.weixin.qq.com/cgi-bin/miniprogram/jscode2session?access_token=ACCESS_TOKEN&js_code=CODE&grant_type=authorization_code
-
-	reqParams := url.Values{
-		"access_token": {token},
-		"grant_type":   {qywxConf.GrantType},
-		"js_code":      {queryMap.Get("code")},
+	reqParams := request.Parameters{
+		"access_token": token,
+		"grant_type":   qywxConf.GrantType,
+		"js_code":      queryMap.Get("code"),
 	}
 
-	url, err := utils.EncodeURL(qywxConf.WechatURL, reqParams)
-	if err != nil {
-		logger.Error(defs.CallFuncErr, err)
-		return ""
-	}
-	logger.Notice(url)
-
-	resp, err = utils.HTTPGet(url)
+	resp, err = request.GET(qywxConf.WechatURL, reqParams)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
 		return ""
 	}
 	logger.Debug(resp)
-	return resp
+	return string(resp)
 }

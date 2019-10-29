@@ -5,7 +5,7 @@ import (
 	config "monaco/config"
 	"monaco/defs"
 	"monaco/logger"
-	"monaco/utils"
+	"monaco/request"
 	"net/url"
 )
 
@@ -47,13 +47,13 @@ func QywxThirdParty(queryMap url.Values) string {
 	//  POST
 	//  https://qyapi.weixin.qq.com/cgi-bin/service/get_suite_token
 
-	resp, err := utils.HTTPPost(qywxConf.ThirdParty.SuiteTokenURL, string(paramJSON))
+	resp, err := request.POST(qywxConf.ThirdParty.SuiteTokenURL, request.Parameters{}, paramJSON)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
 		return ""
 	}
 	logger.Debug(resp)
-	userInfo, err := getUserInfo(resp)
+	userInfo, err := getUserInfo(string(resp))
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
 		return ""
@@ -69,22 +69,16 @@ func getUserInfo(resp string) (string, error) {
 	// suite_access_token 第三方应用凭证
 	// js_code		登录时获取的 code
 	// grant_type	固定为authorization_code
-	reqTokenParam := url.Values{
-		"suite_access_token": {getSuiteToken.SuiteAccessToken},
-		"js_code":            {code},
-		"grant_type":         {"authorization_code"},
+	reqTokenParam := request.Parameters{
+		"suite_access_token": getSuiteToken.SuiteAccessToken,
+		"js_code":            code,
+		"grant_type":         "authorization_code",
 	}
 
-	encodeURL, err := utils.EncodeURL(qywxConf.ThirdParty.TpURL, reqTokenParam)
-	logger.Debug("url: ", encodeURL)
+	res, err := request.GET(qywxConf.ThirdParty.TpURL, reqTokenParam)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
 		return "", err
 	}
-	res, err := utils.HTTPGet(encodeURL)
-	if err != nil {
-		logger.Error(defs.CallFuncErr, err)
-		return "", err
-	}
-	return res, err
+	return string(res), err
 }

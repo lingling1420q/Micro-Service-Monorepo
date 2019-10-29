@@ -4,31 +4,24 @@ import (
 	config "monaco/config"
 	"monaco/defs"
 	"monaco/logger"
-	"monaco/utils"
+	"monaco/request"
 	"net/url"
 )
 
 func Wx(queryMap url.Values) string {
 	wxConf := config.Config.Wechat
-	reqParams := url.Values{
-		"appid":      {wxConf.Appid},
-		"secret":     {wxConf.Secret},
-		"grant_type": {wxConf.GrantType},
-		"js_code":    {queryMap.Get("code")},
+	reqParams := request.Parameters{
+		"appid":      wxConf.Appid,
+		"secret":     wxConf.Secret,
+		"grant_type": wxConf.GrantType,
+		"js_code":    queryMap.Get("code"),
 	}
 
-	url, err := utils.EncodeURL(wxConf.WechatURL, reqParams)
-	if err != nil {
-		logger.Error(defs.CallFuncErr, err)
-		return ""
-	}
-	logger.Notice(url)
-
-	resp, err := utils.HTTPGet(url)
+	resp, err := request.GET(wxConf.WechatURL, reqParams)
 	if err != nil {
 		logger.Error(defs.CallFuncErr, err)
 		return ""
 	}
 	logger.Debug(resp)
-	return resp
+	return string(resp)
 }
