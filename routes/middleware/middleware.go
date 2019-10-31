@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"encoding/json"
 	"fmt"
 	"monaco/db"
 	"monaco/logger"
@@ -28,14 +29,19 @@ func RequestLoggerMiddleware() gin.HandlerFunc {
 	// Do some initialization logic here
 
 	return func(c *gin.Context) {
+		// url parameters
 		query := c.Request.URL.Query()
 		logger.Noticef("Query: %v\r\n", query)
 
+		// application/x-www-form-urlencoded or application/x-www-form-urlencoded
 		formJSON := c.Request.PostForm
 		logger.Noticef("JsonForm: %v\r\n", formJSON)
 
+		// application/json
 		jsonRaw, _ := c.GetRawData()
-		logger.Noticef("JsonData: %v\r\n", string(jsonRaw))
+		var mapResult map[string]interface{}
+		json.Unmarshal(jsonRaw, &mapResult)
+		logger.Noticef("JsonRaw: %v\r\n", mapResult)
 
 		vl := db.TBL_VISIT_LOG{
 			Host:     c.Request.Host,
