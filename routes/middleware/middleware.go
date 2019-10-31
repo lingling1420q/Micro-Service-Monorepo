@@ -34,13 +34,17 @@ func RequestLoggerMiddleware() gin.HandlerFunc {
 		formJSON := c.Request.PostForm
 		logger.Noticef("JsonForm: %v\r\n", formJSON)
 
+		jsonRaw, _ := c.GetRawData()
+		logger.Noticef("JsonData: %v\r\n", string(jsonRaw))
+
 		vl := db.TBL_VISIT_LOG{
 			Host:     c.Request.Host,
 			Method:   c.Request.Method,
 			URL:      fmt.Sprintf("%v", c.Request.URL),
 			Header:   fmt.Sprintf("%v", c.Request.Header),
 			Query:    fmt.Sprintf("%v", query),
-			JSONData: fmt.Sprintf("%v", formJSON),
+			JSONForm: fmt.Sprintf("%v", formJSON),
+			JSONRaw:  fmt.Sprintf("%v", string(jsonRaw)),
 		}
 		db.InsertColume(&vl)
 

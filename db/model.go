@@ -26,5 +26,6 @@ type TBL_VISIT_LOG struct {
 	URL      string
 	Header   string `gorm:"type:text"`
 	Query    string `gorm:"type:text"`
-	JSONData string `gorm:"type:text"`
+	JSONForm string `gorm:"type:text"`
+	JSONRaw  string `gorm:"type:text"`
 }
