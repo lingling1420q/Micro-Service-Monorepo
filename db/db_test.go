@@ -54,12 +54,12 @@ func TestDeleteUser(t *testing.T) {
 
 func TestInsertLog(t *testing.T) {
 	vl := TBL_VISIT_LOG{
-		Host:     "UnitTestHostName",
-		Method:   "UnitTestMethod",
-		URL:      "UnitTestURL",
-		Header:   "UnitTestHeader",
-		Query:    "UnitTestQuery",
-		JSONData: "UnitTestJSONData",
+		Host:    "UnitTestHostName",
+		Method:  "UnitTestMethod",
+		URL:     "UnitTestURL",
+		Header:  "UnitTestHeader",
+		Query:   "UnitTestQuery",
+		JSONRaw: "UnitTestJSONData",
 	}
 	InsertColume(&vl)
 }
