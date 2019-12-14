@@ -1,5 +1,7 @@
 package config
 
+import "os"
+
 func initDevelopmentConf() config {
 	_database := database{
 		Mysql: mysql{
@@ -47,9 +49,10 @@ func initDevelopmentConf() config {
 	}
 
 	return config{
-		DB:       _database,
-		Server:   _server,
-		Wechat:   _wechat,
-		QyWechat: _qyWechat,
+		DB:        _database,
+		Server:    _server,
+		Wechat:    _wechat,
+		QyWechat:  _qyWechat,
+		TmpFolder: os.TempDir(),
 	}
 }

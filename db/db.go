@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	config "monaco/config"
-	"monaco/defs"
 	logger "monaco/logger"
 
 	"github.com/go-redis/redis"
@@ -33,7 +32,7 @@ func ConnGormMysql() *gorm.DB {
 	if gormMysqlClient == nil {
 		gormMysqlClient, err = gorm.Open("mysql", mysqlCfg)
 		if err != nil {
-			logger.Error(defs.ConnDBErr, err.Error())
+			logger.Error("Connect DB Failed: ", err.Error())
 		}
 		gormMysqlClient.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&TBL_USERS{}, &TBL_VISIT_LOG{})
 		// 为`name`列添加索引`idx_user_name`
@@ -48,7 +47,7 @@ func ConnMysql() *sql.DB {
 		logger.Info("mysql database connection initialization ...")
 		sqlClient, err = sql.Open("mysql", mysqlCfg)
 		if err != nil {
-			logger.Error(defs.ConnDBErr, err.Error())
+			logger.Error("Connect DB Failed: ", err.Error())
 			panic(err.Error())
 		}
 	}

@@ -25,11 +25,12 @@ func initConfiguration() {
 }
 
 type config struct {
-	Debug    bool
-	DB       database
-	Server   server
-	Wechat   wechat
-	QyWechat qyWechat
+	Debug     bool
+	DB        database
+	Server    server
+	Wechat    wechat
+	QyWechat  qyWechat
+	TmpFolder string
 }
 
 type database struct {
