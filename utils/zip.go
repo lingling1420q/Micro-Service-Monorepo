@@ -3,12 +3,18 @@ package utils
 import (
 	"archive/zip"
 	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"io"
 	"monaco/config"
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
+)
+
+var (
+	macOsxDirReg = `.+__MACOSX.+`
 )
 
 // UnZip 解压压缩包中文件到tmp目录并返回文件绝对路径
@@ -65,4 +71,16 @@ func UnZip(zipFile string) ([]string, error) {
 		}
 	}
 	return fileNames, nil
+}
+
+// MacOsxDir  判断是否为解压后mac文件夹
+func macOsxDir(filePath string) bool {
+	re := regexp.MustCompile(macOsxDirReg)
+	return re.MatchString(filePath)
+}
+
+// AbsoluteFileName 获取带有uuid的绝对路径
+func AbsoluteFileName(n string) string {
+	ossUUID := uuid.NewV4().String()
+	return path.Join(config.Config.TmpFolder, fmt.Sprintf("%s@%s", ossUUID, n))
 }

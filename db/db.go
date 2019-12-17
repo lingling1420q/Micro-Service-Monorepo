@@ -1,25 +1,18 @@
 package db
 
 import (
-	"database/sql"
-	"fmt"
-	config "monaco/config"
-	logger "monaco/logger"
-
-	"github.com/go-redis/redis"
-
 	_ "github.com/go-sql-driver/mysql" /* mysql driver init */
 	"github.com/jinzhu/gorm"
+	"monaco/config"
+	"monaco/defs"
+	"monaco/logger"
 )
 
-/* TODO: split dbs */
 var (
-	gormMysqlClient *gorm.DB
-	sqlClient       *sql.DB
-	redisClient     *redis.Client
-	dbCfg           = config.Config.DB
-	err             error
-	mysqlCfg        = "Username:Password@tcp(Host:Port)/DbName?parseTime=true"
+	sqlClient *gorm.DB
+	dbCfg     = config.Config.DB
+	err       error
+	mysqlCfg  = "Username:Password@tcp(Host:Port)/DbName?charset=utf8mb4&parseTime=True&loc=Local"
 )
 
 func init() {
@@ -27,43 +20,18 @@ func init() {
 	logger.Noticef("Mysql config: %s", mysqlCfg)
 }
 
-// ConnGormMysql gormMysql
-func ConnGormMysql() *gorm.DB {
-	if gormMysqlClient == nil {
-		gormMysqlClient, err = gorm.Open("mysql", mysqlCfg)
+// DB gormMysql 数据库链接
+func DB() *gorm.DB {
+	if sqlClient == nil || sqlClient.DB().Ping() != nil {
+		sqlClient, err = gorm.Open("mysql", mysqlCfg)
+		sqlClient.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
+			&TBL_USERS{},
+			&TBL_VISIT_LOG{},
+		)
+		sqlClient.LogMode(dbCfg.Debug)
 		if err != nil {
-			logger.Error("Connect DB Failed: ", err.Error())
-		}
-		gormMysqlClient.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&TBL_USERS{}, &TBL_VISIT_LOG{})
-		// 为`name`列添加索引`idx_user_name`
-		// gormMysqlClient.Model(&TBL_USERS{}).AddIndex("idx_user_name", "name")
-	}
-	return gormMysqlClient
-}
-
-// ConnMysql  connect to mysql
-func ConnMysql() *sql.DB {
-	if sqlClient == nil || sqlClient.Ping() != nil {
-		logger.Info("mysql database connection initialization ...")
-		sqlClient, err = sql.Open("mysql", mysqlCfg)
-		if err != nil {
-			logger.Error("Connect DB Failed: ", err.Error())
-			panic(err.Error())
+			logger.Error(defs.ConnDBErr, err.Error())
 		}
 	}
 	return sqlClient
-}
-
-// ConnRedis connect to redis
-func ConnRedis() *redis.Client {
-	if redisClient == nil {
-		logger.Info("redis database connection initialization ...")
-		client := redis.NewClient(&redis.Options{
-			Addr:     dbCfg.Redis.Host + ":" + dbCfg.Redis.Port,
-			Password: dbCfg.Redis.Password,
-			DB:       dbCfg.Redis.DbName,
-		})
-		fmt.Println(client.Ping().Result())
-	}
-	return redisClient
 }

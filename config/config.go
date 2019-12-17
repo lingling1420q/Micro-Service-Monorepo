@@ -1,13 +1,16 @@
 package config
 
-import "log"
+import (
+	"log"
+	"os"
+)
 
 var (
 	// Config : Global Configuration
 	Config config
 
 	// switch env here
-	isProduction bool = false
+	appENV string = os.Getenv("APP_ENV")
 )
 
 func init() {
@@ -15,11 +18,14 @@ func init() {
 }
 
 func initConfiguration() {
-	if isProduction {
+	if appENV == "PRODUCTION" {
 		Config = initProductionConfig()
 		log.Println("Initialization Production Configuration ...")
+	} else if appENV == "STAGING" {
+		Config = initStagingConfig()
+		log.Println("Initialization Staging Configuration ...")
 	} else {
-		Config = initDevelopmentConf()
+		Config = initDevelopmentConfig()
 		log.Println("Initialization Development Configuration ...")
 	}
 }

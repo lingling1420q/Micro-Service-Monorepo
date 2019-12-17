@@ -2,7 +2,7 @@ package config
 
 import "os"
 
-func initDevelopmentConfig() config {
+func initStagingConfig() config {
 	_database := database{
 		Mysql: mysql{
 			Host:     "www.luxuze.club",

@@ -12,8 +12,8 @@ func TestInitCfg(t *testing.T) {
 	t.Log(mysqlCfg)
 }
 
-func TestConnGormMysql(t *testing.T) {
-	connError := ConnGormMysql().GetErrors()
+func TestDB(t *testing.T) {
+	connError := DB().GetErrors()
 	if len(connError) != 0 {
 		t.Error(connError)
 	}

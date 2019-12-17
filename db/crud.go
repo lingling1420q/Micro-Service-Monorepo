@@ -36,16 +36,16 @@ func (vl *TBL_VISIT_LOG) delete(c *gorm.DB) {
 }
 
 func InsertColume(t tblStruct) {
-	gormConn := ConnGormMysql()
+	gormConn := DB()
 	t.insert(gormConn)
 }
 
 func FindColume(t tblStruct) *gorm.DB {
-	gormConn := ConnGormMysql()
+	gormConn := DB()
 	return t.find(gormConn)
 }
 
 func Deletecolume(t tblStruct) {
-	gormConn := ConnGormMysql()
+	gormConn := DB()
 	t.delete(gormConn)
 }
