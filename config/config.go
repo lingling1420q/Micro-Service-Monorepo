@@ -42,6 +42,7 @@ type config struct {
 type database struct {
 	Mysql mysql
 	Redis redis
+	Debug bool
 }
 
 type mysql struct {

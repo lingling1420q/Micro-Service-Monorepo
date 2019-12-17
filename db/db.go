@@ -4,7 +4,6 @@ import (
 	_ "github.com/go-sql-driver/mysql" /* mysql driver init */
 	"github.com/jinzhu/gorm"
 	"monaco/config"
-	"monaco/defs"
 	"monaco/logger"
 )
 
@@ -30,7 +29,7 @@ func DB() *gorm.DB {
 		)
 		sqlClient.LogMode(dbCfg.Debug)
 		if err != nil {
-			logger.Error(defs.ConnDBErr, err.Error())
+			logger.Error("defs.ConnDBErr", err.Error())
 		}
 	}
 	return sqlClient

@@ -5,10 +5,27 @@ import (
 	"fmt"
 	"monaco/db"
 	"monaco/logger"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 )
+
+// CORS Cross-Origin Resource Sharing 跨源资源共享
+func CORS() gin.HandlerFunc {
+	return cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		// AllowOriginFunc: func(origin string) bool {
+		// 	return origin == "https://github.com"
+		// },
+		MaxAge: 12 * time.Hour,
+	})
+}
 
 func ParseFormMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {

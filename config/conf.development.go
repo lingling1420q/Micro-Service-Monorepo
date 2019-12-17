@@ -17,6 +17,7 @@ func initDevelopmentConfig() config {
 			Password: "123456",
 			DbName:   0,
 		},
+		Debug: true,
 	}
 
 	_server := server{

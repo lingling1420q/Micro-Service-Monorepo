@@ -17,6 +17,7 @@ func initProductionConfig() config {
 			Password: "pl,okm123",
 			DbName:   0,
 		},
+		Debug: true,
 	}
 
 	_server := server{

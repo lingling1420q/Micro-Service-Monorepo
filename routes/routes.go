@@ -13,6 +13,9 @@ import (
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 
+	// CORS
+	r.Use(mw.CORS())
+
 	// middlewares
 	r.Use(mw.ParseFormMiddleware())
 	r.Use(mw.RequestIdMiddleware())
