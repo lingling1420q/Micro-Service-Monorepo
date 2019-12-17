@@ -34,8 +34,6 @@ type config struct {
 	Debug     bool
 	DB        database
 	Server    server
-	Wechat    wechat
-	QyWechat  qyWechat
 	TmpFolder string
 }
 
@@ -64,27 +62,4 @@ type server struct {
 	Debug   bool
 	Port    string
 	LogPath string
-}
-
-type wechat struct {
-	WechatURL string
-	Appid     string
-	Secret    string
-	GrantType string
-}
-
-type thirdParty struct {
-	SuiteTokenURL string
-	SuiteID       string
-	SuitSecret    string
-	TpURL         string
-}
-
-type qyWechat struct {
-	WechatURL   string
-	GetTokenURL string
-	Corpid      string
-	Secret      string
-	GrantType   string
-	ThirdParty  thirdParty
 }
