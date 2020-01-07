@@ -59,7 +59,7 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	logger.Noticef("Gin is Running in Debug mode: %v", serverCfg.Debug)
-	service.Handle("/gin", routes.InitRouter())
+	service.Handle("/", routes.InitRouter())
 
 	if err := service.Run(); err != nil {
 		log.Fatalf("Start Failed: %v", err)
