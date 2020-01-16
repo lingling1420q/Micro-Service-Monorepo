@@ -1,7 +1,7 @@
 package db
 
 import (
-	config "micro-service-monorepo/gin/config"
+	config "micro-service-monorepo/admin/server/config"
 	"testing"
 )
 

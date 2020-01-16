@@ -2,10 +2,10 @@ package routes
 
 import (
 	gin "github.com/gin-gonic/gin"
-	api1 "micro-service-monorepo/gin/routes/api1"
-	index "micro-service-monorepo/gin/routes/index"
-	mw "micro-service-monorepo/gin/routes/middleware"
-	doc "micro-service-monorepo/gin/routes/swagger"
+	api1 "micro-service-monorepo/admin/server/routes/api1"
+	index "micro-service-monorepo/admin/server/routes/index"
+	mw "micro-service-monorepo/admin/server/routes/middleware"
+	doc "micro-service-monorepo/admin/server/routes/swagger"
 )
 
 // InitRouter ...

@@ -3,8 +3,8 @@ package middleware
 import (
 	"encoding/json"
 	"fmt"
-	"micro-service-monorepo/gin/db"
-	"micro-service-monorepo/gin/logger"
+	"micro-service-monorepo/admin/server/db"
+	"micro-service-monorepo/admin/server/logger"
 	"time"
 
 	"github.com/gin-contrib/cors"

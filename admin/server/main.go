@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-	config "micro-service-monorepo/gin/config"
-	logger "micro-service-monorepo/gin/logger"
-	routes "micro-service-monorepo/gin/routes"
+	config "micro-service-monorepo/admin/server/config"
+	logger "micro-service-monorepo/admin/server/logger"
+	routes "micro-service-monorepo/admin/server/routes"
 
 	"github.com/gin-gonic/gin"
 	web "github.com/micro/go-micro/web"

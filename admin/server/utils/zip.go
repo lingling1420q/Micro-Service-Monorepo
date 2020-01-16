@@ -5,7 +5,7 @@ import (
 	"fmt"
 	uuid "github.com/satori/go.uuid"
 	"io"
-	"micro-service-monorepo/gin/config"
+	"micro-service-monorepo/admin/server/config"
 	"os"
 	"path"
 	"path/filepath"

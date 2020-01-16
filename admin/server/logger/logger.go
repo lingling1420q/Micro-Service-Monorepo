@@ -1,7 +1,7 @@
 package logger
 
 import (
-	config "micro-service-monorepo/gin/config"
+	config "micro-service-monorepo/admin/server/config"
 	"os"
 
 	"github.com/op/go-logging"

@@ -1,7 +1,7 @@
 package swagger
 
 import (
-	_ "micro-service-monorepo/gin/docs" /* doc files */
+	_ "micro-service-monorepo/admin/server/docs" /* doc files */
 	"net/http"
 
 	gin "github.com/gin-gonic/gin"

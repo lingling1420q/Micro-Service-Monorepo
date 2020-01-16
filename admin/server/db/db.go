@@ -3,8 +3,8 @@ package db
 import (
 	_ "github.com/go-sql-driver/mysql" /* mysql driver init */
 	"github.com/jinzhu/gorm"
-	"micro-service-monorepo/gin/config"
-	"micro-service-monorepo/gin/logger"
+	"micro-service-monorepo/admin/server/config"
+	"micro-service-monorepo/admin/server/logger"
 )
 
 var (

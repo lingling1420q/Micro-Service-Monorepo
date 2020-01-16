@@ -3,7 +3,7 @@ package request
 import (
 	"bytes"
 	"io/ioutil"
-	"micro-service-monorepo/gin/logger"
+	"micro-service-monorepo/admin/server/logger"
 	"net/http"
 )
 
