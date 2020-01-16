@@ -1,4 +1,5 @@
 const pathToRegexp = require('path-to-regexp');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bodyParser = require('body-parser');
 
 const mockFile = require('./index');

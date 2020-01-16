@@ -1,15 +1,17 @@
-import { IConfig, IPlugin } from 'umi-types';
+// eslint-disable-next-line import/no-unresolved
+import { IConfig, IPlugin } from 'umi-types'; // eslint-disable-next-line import/no-extraneous-dependencies
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 import slash from 'slash2';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
+
 import themePluginConfig from './themePluginConfig';
 
-const { pwa } = defaultSettings;
-
-// preview.pro.ant.design only do not use in your production ;
+const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
-
 const plugins: IPlugin[] = [
   [
     'umi-plugin-react',
@@ -114,6 +116,12 @@ export default {
               authority: ['admin'],
             },
             {
+              name: '个人设置',
+              icon: 'smile',
+              path: '/accountsettings',
+              component: './AccountSettings',
+            },
+            {
               component: './404',
             },
           ],
@@ -123,7 +131,6 @@ export default {
         },
       ],
     },
-
     {
       component: './404',
     },
@@ -148,7 +155,7 @@ export default {
         resourcePath: string;
       },
       _: string,
-      localName: string,
+      localName: string
     ) => {
       if (
         context.resourcePath.includes('node_modules') ||
@@ -174,8 +181,7 @@ export default {
   },
   manifest: {
     basePath: '/',
-  },
-  // chainWebpack: webpackPlugin,
+  }, // chainWebpack: webpackPlugin,
   // proxy: {
   //   '/server/api/': {
   //     target: 'https://preview.pro.ant.design/',
