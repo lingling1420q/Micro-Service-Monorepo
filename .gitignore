@@ -1,15 +1,21 @@
+# editor
 .idea
-
 !.vscode/launch.json
 .vscode
 
+# mac os
 .DS_Store
 
+# tmp folder
+tmp
 *.log
 
-# docs
-
+# golang
 !vendor/modules.txt
 vendor
 
+# ts / js
 node_modules
+
+# python
+*.pyc
