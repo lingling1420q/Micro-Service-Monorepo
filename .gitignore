@@ -11,3 +11,5 @@
 
 !vendor/modules.txt
 vendor
+
+node_modules
