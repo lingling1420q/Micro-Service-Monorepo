@@ -1,6 +1,5 @@
 # editor
 .idea
-!.vscode/launch.json
 .vscode
 
 # mac os
@@ -11,8 +10,8 @@ tmp
 *.log
 
 # golang
-!vendor/modules.txt
 vendor
+c.go
 
 # ts / js
 node_modules

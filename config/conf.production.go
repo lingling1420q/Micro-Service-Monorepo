@@ -1,31 +1,17 @@
 package config
 
-import "os"
-
-func initProductionConfig() config {
-
-	return config{
-		DB: database{
-			Mysql: mysql{
-				Host:     "www.luxuze.club",
-				Port:     "3306",
-				Username: "root",
-				Password: "pl,okm123",
-				DbName:   "gin",
-			},
-			Redis: redis{
-				Host:     "47.105.181.69",
-				Port:     "6379",
-				Password: "123456",
-				DbName:   0,
-			},
-			Debug: true,
-		},
-		Server: server{
-			Debug:   true,
-			Port:    ":4096",
-			LogPath: "./tmp/logs/gin.log",
-		},
-		TmpFolder: os.TempDir(),
+func production() {
+	Etcd.Addrs = []string{
+		"127.0.0.1:23791",
+		"127.0.0.1:23792",
+		"127.0.0.1:23793",
+	}
+	Srv1 = srv{
+		MicroName: "go.micro.srv.srv1",
+		Version:   "v0.0.1",
+		Address:   "0.0.0.0:10001",
+		Debug:     false,
+		DbURI:     "",
+		DbDebug:   false,
 	}
 }

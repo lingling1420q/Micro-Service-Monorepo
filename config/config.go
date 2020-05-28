@@ -1,65 +1,50 @@
 package config
 
 import (
-	"log"
 	"os"
+
+	"github.com/monaco-io/logger"
+)
+
+// init config
+var (
+	Production       = os.Getenv("PRODUCTION")
+	EnableKubernetes = os.Getenv("ENABLE_KUBERNETES")
 )
 
 var (
-	// Config : Global Configuration
-	Config config
+	mock interface{}
+)
 
-	// switch env here
-	appENV string = os.Getenv("APP_ENV")
+// service config
+var (
+	Etcd etcd
+	Srv1 srv
 )
 
 func init() {
-	initConfiguration()
-}
-
-func initConfiguration() {
-	if appENV == "PRODUCTION" {
-		Config = initProductionConfig()
-		log.Println("Initialization Production Configuration ...")
-	} else if appENV == "STAGING" {
-		Config = initStagingConfig()
-		log.Println("Initialization Staging Configuration ...")
-	} else {
-		Config = initDevelopmentConfig()
-		log.Println("Initialization Development Configuration ...")
+	logger.I("System environment", "Production", Production, "EnableKubernetes", EnableKubernetes)
+	switch Production {
+	case "YES":
+		production()
+	default:
+		staging()
+		switch mock.(type) {
+		case func():
+			mock.(func())()
+		}
 	}
 }
 
-type config struct {
+type etcd struct {
+	Addrs []string
+}
+
+type srv struct {
+	MicroName string
+	Version   string
+	Address   string
 	Debug     bool
-	DB        database
-	Server    server
-	TmpFolder string
-}
-
-type database struct {
-	Mysql mysql
-	Redis redis
-	Debug bool
-}
-
-type mysql struct {
-	Host     string
-	Port     string
-	Username string
-	Password string
-	DbName   string
-}
-
-type redis struct {
-	Host     string
-	Port     string
-	Password string
-	DbName   int
-}
-
-type server struct {
-	Debug   bool
-	Port    string
-	LogPath string
+	DbURI     string
+	DbDebug   bool
 }

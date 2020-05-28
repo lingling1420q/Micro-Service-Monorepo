@@ -1,0 +1,15 @@
+package config
+
+import "github.com/monaco-io/logger"
+
+func init() {
+	mock = func() {
+		//do any thing you want.
+		Etcd.Addrs = []string{
+			"127.0.0.1:23791",
+			"127.0.0.1:23792",
+			"127.0.0.1:23793",
+		}
+		logger.I("mock etcd", "etcd", Etcd.Addrs)
+	}
+}
