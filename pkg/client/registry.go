@@ -2,6 +2,7 @@ package client
 
 import (
 	"monorepo/pkg/config"
+	"monorepo/pkg/global"
 
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
@@ -11,7 +12,7 @@ import (
 )
 
 func NewRegistry() registry.Registry {
-	if config.EnableKubernetes != "YES" {
+	if config.EnableKubernetes != global.YES {
 		return etcdv3.NewRegistry(
 			func(op *registry.Options) {
 				op.Addrs = config.Etcd.Addrs

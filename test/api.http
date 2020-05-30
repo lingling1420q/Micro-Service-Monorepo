@@ -1,5 +1,6 @@
-@microAPI = http://172.17.17.83:8080
-@microWeb = http://172.17.17.83:8082/rpc
+@hostname = http://172.17.17.83
+@microAPI = {{hostname}}:8080
+@microWeb = {{hostname}}:8082/rpc
 @applicationJSON = application/json
 
 ### rpc: go.micro.service.svc1 - Svc1.CallSvc2
