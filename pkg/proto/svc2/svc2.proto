@@ -1,8 +1,9 @@
 syntax = "proto3";
 
-package go.micro.srv.srv1;
+package go.micro.service.svc2;
+option go_package = "pkg/proto/svc2";
 
-service Srv1 {
+service Svc2 {
 	rpc Call(Request) returns (Response) {}
 	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
 	rpc PingPong(stream Ping) returns (stream Pong) {}

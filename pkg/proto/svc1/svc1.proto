@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package go.micro.service.svc1;
+option go_package = "pkg/proto/svc1";
+
+service Svc1 {
+	rpc Call(Request) returns (Response) {}
+}
+
+message Request {
+	string name = 1;
+}
+
+message Response {
+	string msg = 1;
+}

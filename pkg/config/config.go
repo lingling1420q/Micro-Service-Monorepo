@@ -19,7 +19,8 @@ var (
 // service config
 var (
 	Etcd etcd
-	Srv1 srv
+	Svc1 service
+	Svc2 service
 )
 
 func init() {
@@ -40,7 +41,7 @@ type etcd struct {
 	Addrs []string
 }
 
-type srv struct {
+type service struct {
 	MicroName string
 	Version   string
 	Address   string
