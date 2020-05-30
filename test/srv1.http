@@ -1,4 +1,0 @@
-GET {{baseUrl}}/api/srv/srv1
-Accept: application/json
-
-###

@@ -4,13 +4,13 @@ package go.micro.service.svc1;
 option go_package = "pkg/proto/svc1";
 
 service Svc1 {
-	rpc Call(Request) returns (Response) {}
+	rpc CallSvc2(CallSvc2Request) returns (CallSvc2Response) {}
 }
 
-message Request {
+message CallSvc2Request {
 	string name = 1;
 }
 
-message Response {
+message CallSvc2Response {
 	string msg = 1;
 }

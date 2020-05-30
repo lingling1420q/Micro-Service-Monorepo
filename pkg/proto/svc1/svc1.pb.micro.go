@@ -42,7 +42,7 @@ func NewSvc1Endpoints() []*api.Endpoint {
 // Client API for Svc1 service
 
 type Svc1Service interface {
-	Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	CallSvc2(ctx context.Context, in *CallSvc2Request, opts ...client.CallOption) (*CallSvc2Response, error)
 }
 
 type svc1Service struct {
@@ -57,9 +57,9 @@ func NewSvc1Service(name string, c client.Client) Svc1Service {
 	}
 }
 
-func (c *svc1Service) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Svc1.Call", in)
-	out := new(Response)
+func (c *svc1Service) CallSvc2(ctx context.Context, in *CallSvc2Request, opts ...client.CallOption) (*CallSvc2Response, error) {
+	req := c.c.NewRequest(c.name, "Svc1.CallSvc2", in)
+	out := new(CallSvc2Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,12 +70,12 @@ func (c *svc1Service) Call(ctx context.Context, in *Request, opts ...client.Call
 // Server API for Svc1 service
 
 type Svc1Handler interface {
-	Call(context.Context, *Request, *Response) error
+	CallSvc2(context.Context, *CallSvc2Request, *CallSvc2Response) error
 }
 
 func RegisterSvc1Handler(s server.Server, hdlr Svc1Handler, opts ...server.HandlerOption) error {
 	type svc1 interface {
-		Call(ctx context.Context, in *Request, out *Response) error
+		CallSvc2(ctx context.Context, in *CallSvc2Request, out *CallSvc2Response) error
 	}
 	type Svc1 struct {
 		svc1
@@ -88,6 +88,6 @@ type svc1Handler struct {
 	Svc1Handler
 }
 
-func (h *svc1Handler) Call(ctx context.Context, in *Request, out *Response) error {
-	return h.Svc1Handler.Call(ctx, in, out)
+func (h *svc1Handler) CallSvc2(ctx context.Context, in *CallSvc2Request, out *CallSvc2Response) error {
+	return h.Svc1Handler.CallSvc2(ctx, in, out)
 }

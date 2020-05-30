@@ -2,6 +2,8 @@ package main
 
 import (
 	"monorepo/pkg/config"
+	svc1 "monorepo/pkg/proto/svc1"
+	"monorepo/service/svc1/handler"
 
 	"github.com/micro/go-micro/v2"
 	"github.com/monaco-io/logger"
@@ -9,13 +11,12 @@ import (
 
 func main() {
 	service := micro.NewService(
-		micro.Name(config.Srv1.MicroName),
-		micro.Version(config.config.Srv1.Version),
-		micro.Address(config.config.Srv1.Address),
+		micro.Name(config.Svc1.MicroName),
+		micro.Version(config.Svc1.Version),
 	)
 	service.Init()
 
-	if err := Srv1.RegisterSrv1Handler(service.Server(), new(handler.Srv1)); err != nil {
+	if err := svc1.RegisterSvc1Handler(service.Server(), new(handler.Svc1)); err != nil {
 		logger.F("service register failed.", "err", err)
 	}
 

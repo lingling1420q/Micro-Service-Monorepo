@@ -1,0 +1,21 @@
+@microAPI = http://172.17.17.83:8080
+@microWeb = http://172.17.17.83:8082/rpc
+@applicationJSON = application/json
+
+### rpc: go.micro.service.svc1 - Svc1.CallSvc2
+POST {{microWeb}}
+content-type: {{applicationJSON}}
+
+{
+    "service":"go.micro.service.svc1",
+    "endpoint":"Svc1.CallSvc2",
+    "request":{"name":"world"}
+}
+
+### rpc: go.micro.api.svc1 - Svc1.CallSvc2
+POST {{microAPI}}/svc1/svc1/callSvc2
+content-type: {{applicationJSON}}
+
+{
+    "name":"world"
+}
