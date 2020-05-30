@@ -8,6 +8,5 @@ require (
 	github.com/micro/go-plugins/registry/etcdv3/v2 v2.5.0
 	github.com/micro/go-plugins/registry/kubernetes/v2 v2.5.0
 	github.com/monaco-io/logger v0.0.5
-	google.golang.org/grpc v1.26.0
 	google.golang.org/protobuf v1.23.0
 )
