@@ -1,6 +1,6 @@
 # MONOREPO
 
-## install protoc
+## protoc installation
 
 ```sh
 VERSION=3.12.2
@@ -9,4 +9,10 @@ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v$VERSION
 sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
 sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
 rm -f $PROTOC_ZIP
+```
+
+## protoc-gen-go installation
+
+```sh
+go get -u -v github.com/golang/protobuf/protoc-gen-go
 ```
