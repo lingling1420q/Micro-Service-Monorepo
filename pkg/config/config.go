@@ -1,6 +1,7 @@
 package config
 
 import (
+	"monorepo/pkg/global"
 	"os"
 
 	"github.com/monaco-io/logger"
@@ -26,7 +27,7 @@ var (
 func init() {
 	logger.I("System environment", "Production", Production, "EnableKubernetes", EnableKubernetes)
 	switch Production {
-	case "YES":
+	case global.YES:
 		production()
 	default:
 		staging()
